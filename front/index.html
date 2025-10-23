@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>影评社区 · 登录注册</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --background: #f5f7fb;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(148, 163, 184, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Noto Sans SC', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--background);
+      color: var(--text-main);
+    }
+
+    .auth-wrapper {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 40px 24px;
+      background: radial-gradient(120% 140% at 10% 10%, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0) 60%),
+        radial-gradient(80% 100% at 90% 10%, rgba(147, 51, 234, 0.18) 0%, rgba(147, 51, 234, 0) 65%),
+        radial-gradient(120% 150% at 50% 90%, rgba(6, 182, 212, 0.15) 0%, rgba(6, 182, 212, 0) 70%),
+        var(--background);
+    }
+
+    .auth-container {
+      width: min(1100px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      background: var(--card-bg);
+      box-shadow: 0 28px 50px rgba(15, 23, 42, 0.16);
+      border-radius: 32px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .hero-panel {
+      position: relative;
+      background: linear-gradient(145deg, #1d4ed8 0%, #1e293b 55%, #0f172a 100%);
+      color: #fff;
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 48px;
+      overflow: hidden;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=1200&q=80') center/cover;
+      opacity: 0.25;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, rgba(59, 130, 246, 0) 70%);
+      bottom: -120px;
+      right: -120px;
+      opacity: 0.75;
+    }
+
+    .hero-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand span.icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+      font-size: 22px;
+    }
+
+    .hero-panel h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(32px, 3vw, 40px);
+      margin: 0;
+      line-height: 1.2;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-highlights {
+      display: grid;
+      gap: 16px;
+    }
+
+    .hero-highlights li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .hero-highlights li::before {
+      content: "";
+      flex-shrink: 0;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 60%, #6366f1 100%);
+      box-shadow: 0 0 0 6px rgba(148, 163, 184, 0.18);
+    }
+
+    .forms-panel {
+      padding: 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .forms-panel header h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .forms-panel header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    .tab-switcher {
+      display: inline-flex;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px;
+      background: rgba(148, 163, 184, 0.12);
+    }
+
+    .tab-switcher button {
+      border: none;
+      background: transparent;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+      font-family: inherit;
+    }
+
+    .tab-switcher button.active {
+      background: #fff;
+      color: var(--text-main);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+    }
+
+    form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    label {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .field input {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 14px 16px 14px 48px;
+      font-size: 15px;
+      font-family: inherit;
+      background: rgba(241, 245, 249, 0.5);
+      color: var(--text-main);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: rgba(59, 130, 246, 0.7);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+      background: #fff;
+    }
+
+    .field span.icon {
+      position: absolute;
+      top: 50%;
+      left: 18px;
+      translate: 0 -50%;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .field button.toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      translate: 0 -50%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+
+    .field button.toggle-password:hover {
+      color: var(--primary);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .actions a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .actions a:hover {
+      text-decoration: underline;
+    }
+
+    .primary-btn {
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 26px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 30px rgba(37, 99, 235, 0.25);
+    }
+
+    .agreement {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .agreement input {
+      margin-top: 3px;
+    }
+
+    .form-footer {
+      display: grid;
+      gap: 22px;
+    }
+
+    .social-login {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .social-login button {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .social-login button:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      transform: translateY(-2px);
+    }
+
+    form.hidden {
+      display: none;
+    }
+
+    @media (max-width: 1024px) {
+      .auth-container {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-panel {
+        padding: 56px 48px;
+      }
+
+      .forms-panel {
+        padding: 48px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .auth-wrapper {
+        padding: 16px;
+      }
+
+      .auth-container {
+        border-radius: 24px;
+      }
+
+      .hero-panel {
+        padding: 40px 28px;
+        gap: 32px;
+      }
+
+      .hero-panel::after {
+        width: 320px;
+        height: 320px;
+      }
+
+      .forms-panel {
+        padding: 36px 24px 48px;
+      }
+
+      .actions {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .social-login {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-container">
+      <section class="hero-panel">
+        <div>
+          <div class="brand"><span class="icon">🎬</span>CRITIQ</div>
+          <h1>重新定义你的观影体验</h1>
+          <p>发现当下热映影片、与志同道合的影迷交流观点、收藏每一次心动的影评。</p>
+        </div>
+        <ul class="hero-highlights">
+          <li>实时同步最热电影榜单与票房数据</li>
+          <li>千万影迷在线分享真诚评论与评分</li>
+          <li>个性化推荐系统永远有新片陪伴</li>
+        </ul>
+      </section>
+      <section class="forms-panel">
+        <header>
+          <h2>欢迎回到 Critiq</h2>
+          <p>登录账号或立即注册，畅享影评社区全功能。</p>
+        </header>
+        <div class="tab-switcher" role="tablist">
+          <button id="tab-login" class="active" type="button" role="tab" aria-selected="true" aria-controls="login-form">登录</button>
+          <button id="tab-register" type="button" role="tab" aria-selected="false" aria-controls="register-form">注册</button>
+        </div>
+
+        <form id="login-form" aria-labelledby="tab-login">
+          <div class="input-group">
+            <label for="login-identifier">用户名或手机号</label>
+            <div class="field">
+              <span class="icon">👤</span>
+              <input type="text" id="login-identifier" name="identifier" placeholder="例如：zhangsan 或 13800001111" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="login-password">密码</label>
+            <div class="field">
+              <span class="icon">🔒</span>
+              <input type="password" id="login-password" name="password" placeholder="请输入密码" minlength="6" required>
+              <button class="toggle-password" type="button" data-target="login-password">显示</button>
+            </div>
+          </div>
+          <div class="actions">
+            <label><input type="checkbox" name="remember"> 记住我</label>
+            <a href="#">忘记密码？</a>
+          </div>
+          <button class="primary-btn" type="submit">立即登录</button>
+          <div class="form-footer">
+            <div class="divider" aria-hidden="true" style="display:flex;align-items:center;gap:12px;color:var(--text-muted);font-size:13px;">
+              <span style="flex:1;height:1px;background:var(--border);"></span>
+              <span>或使用以下方式登录</span>
+              <span style="flex:1;height:1px;background:var(--border);"></span>
+            </div>
+            <div class="social-login">
+              <button type="button">微信</button>
+              <button type="button">QQ</button>
+              <button type="button">微博</button>
+            </div>
+          </div>
+        </form>
+
+        <form id="register-form" class="hidden" aria-labelledby="tab-register">
+          <div class="input-group">
+            <label for="register-username">用户名</label>
+            <div class="field">
+              <span class="icon">🧑</span>
+              <input type="text" id="register-username" name="username" placeholder="请输入用户名" minlength="3" maxlength="50" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="register-phone">手机号</label>
+            <div class="field">
+              <span class="icon">📱</span>
+              <input type="tel" id="register-phone" name="phone" placeholder="请输入11位手机号" pattern="^1[3-9]\d{9}$" required>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="register-password">密码</label>
+            <div class="field">
+              <span class="icon">🔐</span>
+              <input type="password" id="register-password" name="password" placeholder="至少 8 个字符" minlength="8" required>
+              <button class="toggle-password" type="button" data-target="register-password">显示</button>
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="register-confirm">确认密码</label>
+            <div class="field">
+              <span class="icon">✅</span>
+              <input type="password" id="register-confirm" name="confirmPassword" placeholder="再次输入密码" minlength="8" required>
+              <button class="toggle-password" type="button" data-target="register-confirm">显示</button>
+            </div>
+          </div>
+          <div class="agreement">
+            <input type="checkbox" id="terms" required>
+            <label for="terms">我已阅读并同意 <a href="#" style="color:var(--primary);text-decoration:none;">服务条款</a> 与 <a href="#" style="color:var(--primary);text-decoration:none;">隐私政策</a></label>
+          </div>
+          <button class="primary-btn" type="submit">立即注册</button>
+        </form>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    tabLogin.addEventListener('click', () => {
+      tabLogin.classList.add('active');
+      tabRegister.classList.remove('active');
+      tabLogin.setAttribute('aria-selected', 'true');
+      tabRegister.setAttribute('aria-selected', 'false');
+      loginForm.classList.remove('hidden');
+      registerForm.classList.add('hidden');
+    });
+
+    tabRegister.addEventListener('click', () => {
+      tabRegister.classList.add('active');
+      tabLogin.classList.remove('active');
+      tabRegister.setAttribute('aria-selected', 'true');
+      tabLogin.setAttribute('aria-selected', 'false');
+      registerForm.classList.remove('hidden');
+      loginForm.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.dataset.target;
+        const field = document.getElementById(targetId);
+        const isPassword = field.type === 'password';
+        field.type = isPassword ? 'text' : 'password';
+        btn.textContent = isPassword ? '隐藏' : '显示';
+      });
+    });
+
+    loginForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const identifier = loginForm.identifier.value.trim();
+      const password = loginForm.password.value.trim();
+
+      if (!identifier || !password) {
+        alert('请输入完整的登录信息');
+        return;
+      }
+
+      alert('登录成功！');
+    });
+
+    registerForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const username = registerForm.username.value.trim();
+      const phone = registerForm.phone.value.trim();
+      const password = registerForm.password.value.trim();
+      const confirmPassword = registerForm.confirmPassword.value.trim();
+
+      if (password !== confirmPassword) {
+        alert('两次输入的密码不一致');
+        return;
+      }
+
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        alert('请输入有效的 11 位手机号');
+        return;
+      }
+
+      alert('注册成功，欢迎加入 Critiq！');
+    });
+  </script>
+</body>
+</html>
