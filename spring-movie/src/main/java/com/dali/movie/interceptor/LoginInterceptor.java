@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 //拦截器——用拦截器来实现强制登录
@@ -19,6 +20,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         //2. 校验token, 判断是否放行
         String token = request.getHeader(Constants.REQUEST_HEADER_TOKEN);
         log.info("从header中获取token:{},{}", token,request.getRequestURI());
+        if (!StringUtils.hasText(token)) {
+            response.setStatus(401);
+            return false;
+        }
         //解析token
         Claims claims = JwtUtils.parseToken(token);
         if (claims==null){
