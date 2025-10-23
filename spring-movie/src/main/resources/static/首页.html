@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>电影评论平台</title>
+  <title>Critiq · 影评社区登录注册</title>
   <!-- 引入外部资源 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  
+
   <!-- Tailwind 配置 -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            primary: '#E50914', // 电影红
-            secondary: '#0F172A', // 深蓝黑
-            accent: '#F59E0B', // 金色点缀
-            neutral: '#1E293B', // 中性深灰
+            primary: '#E50914',
+            secondary: '#0F172A',
+            accent: '#F59E0B',
+            neutral: '#1E293B',
           },
           fontFamily: {
             sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -26,7 +26,7 @@
       }
     }
   </script>
-  
+
   <!-- 自定义工具类 -->
   <style type="text/tailwindcss">
     @layer utilities {
@@ -49,7 +49,7 @@
   </style>
 </head>
 
-<body class="bg-secondary text-gray-100 min-h-screen font-sans film-grain">
+<body class="bg-secondary text-gray-100 min-h-screen font-sans film-grain opacity-0 transition-opacity duration-700">
   <!-- 背景装饰 -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
     <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
@@ -63,6 +63,7 @@
         <i class="fa fa-film text-primary"></i>
         <span>Critiq</span>
       </h1>
+      <p class="mt-3 text-sm text-gray-400">面向电影爱好者的高品质影评社区</p>
     </div>
 
     <!-- 表单卡片 -->
@@ -80,18 +81,18 @@
       <!-- 登录表单 -->
       <div id="login-form" class="p-6 md:p-8 space-y-6">
         <h2 class="text-2xl font-bold text-shadow">欢迎回来</h2>
-        <p class="text-gray-400">登录你的账号，继续探索电影世界</p>
+        <p class="text-gray-400">使用账号继续探索电影世界</p>
 
-        <form class="space-y-5">
+        <form id="login-form-element" class="space-y-5" novalidate>
           <div>
-            <label for="login-email" class="block text-sm font-medium mb-1.5">邮箱</label>
+            <label for="login-identifier" class="block text-sm font-medium mb-1.5">用户名或手机号</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fa fa-envelope text-gray-500"></i>
+                <i class="fa fa-user text-gray-500"></i>
               </div>
-              <input type="email" id="login-email" 
+              <input type="text" id="login-identifier" name="identifier"
                 class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="your@email.com" required>
+                placeholder="例如：zhangsan 或 12598742365" required>
             </div>
           </div>
 
@@ -104,9 +105,9 @@
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <i class="fa fa-lock text-gray-500"></i>
               </div>
-              <input type="password" id="login-password" 
+              <input type="password" id="login-password" name="password"
                 class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="输入密码" required>
+                placeholder="输入密码" required minlength="6">
               <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="login-password">
                 <i class="fa fa-eye-slash"></i>
               </button>
@@ -125,13 +126,13 @@
         </div>
 
         <div class="grid grid-cols-3 gap-3">
-          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">
+          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors" aria-label="使用 Google 登录">
             <i class="fa fa-google text-gray-400"></i>
           </button>
-          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">
+          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors" aria-label="使用 Facebook 登录">
             <i class="fa fa-facebook text-gray-400"></i>
           </button>
-          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">
+          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors" aria-label="使用 Twitter 登录">
             <i class="fa fa-twitter text-gray-400"></i>
           </button>
         </div>
@@ -140,55 +141,84 @@
       <!-- 注册表单 -->
       <div id="register-form" class="p-6 md:p-8 space-y-6 hidden">
         <h2 class="text-2xl font-bold text-shadow">创建账号</h2>
-        <p class="text-gray-400">加入我们，分享你的电影评论</p>
+        <p class="text-gray-400">完善账号信息，开启你的影评旅程</p>
 
-        <form class="space-y-5">
+        <form id="register-form-element" class="space-y-5" novalidate>
           <div>
-            <label for="register-name" class="block text-sm font-medium mb-1.5">用户名</label>
+            <label for="register-username" class="block text-sm font-medium mb-1.5">用户名</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fa fa-user text-gray-500"></i>
+                <i class="fa fa-id-card text-gray-500"></i>
               </div>
-              <input type="text" id="register-name" 
+              <input type="text" id="register-username" name="username"
                 class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="你的昵称" required>
+                placeholder="例如：movie_fan" required minlength="3" maxlength="50">
             </div>
           </div>
 
           <div>
-            <label for="register-email" class="block text-sm font-medium mb-1.5">邮箱</label>
+            <label for="register-phone" class="block text-sm font-medium mb-1.5">手机号</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fa fa-envelope text-gray-500"></i>
+                <i class="fa fa-phone text-gray-500"></i>
               </div>
-              <input type="email" id="register-email" 
+              <input type="tel" id="register-phone" name="phone"
                 class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="your@email.com" required>
+                placeholder="请输入11位手机号" pattern="^1[3-9]\d{9}$" required>
             </div>
+            <p class="mt-1.5 text-xs text-gray-500">手机号将用于验证和找回密码</p>
           </div>
 
           <div>
-            <label for="register-password" class="block text-sm font-medium mb-1.5">密码</label>
+            <label for="register-nickname" class="block text-sm font-medium mb-1.5">昵称（可选）</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fa fa-lock text-gray-500"></i>
+                <i class="fa fa-smile-o text-gray-500"></i>
               </div>
-              <input type="password" id="register-password" 
-                class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="至少8个字符" required minlength="8">
-              <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="register-password">
-                <i class="fa fa-eye-slash"></i>
-              </button>
+              <input type="text" id="register-nickname" name="nickname"
+                class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                placeholder="在社区中展示的名字">
             </div>
-            <p class="mt-1.5 text-xs text-gray-500">密码需包含字母和数字，至少8个字符</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label for="register-password" class="block text-sm font-medium mb-1.5">密码</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fa fa-lock text-gray-500"></i>
+                </div>
+                <input type="password" id="register-password" name="password"
+                  class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                  placeholder="至少8个字符" required minlength="8">
+                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="register-password">
+                  <i class="fa fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label for="register-confirm" class="block text-sm font-medium mb-1.5">确认密码</label>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <i class="fa fa-check text-gray-500"></i>
+                </div>
+                <input type="password" id="register-confirm" name="confirmPassword"
+                  class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                  placeholder="再次输入密码" required minlength="8">
+                <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="register-confirm">
+                  <i class="fa fa-eye-slash"></i>
+                </button>
+              </div>
+            </div>
           </div>
 
           <div class="flex items-start">
             <div class="flex items-center h-5">
               <input id="terms" type="checkbox" class="w-4 h-4 rounded border-gray-600 bg-gray-900 text-primary focus:ring-primary/50 transition-all" required>
             </div>
-            <div class="ml-3 text-sm">
-              <label for="terms" class="text-gray-400">我同意<a href="#" class="text-primary hover:underline">服务条款</a>和<a href="#" class="text-primary hover:underline">隐私政策</a></label>
+            <div class="ml-3 text-sm text-gray-400">
+              <label for="terms">我已阅读并同意<a href="#" class="text-primary hover:underline">服务条款</a>和<a href="#" class="text-primary hover:underline">隐私政策</a></label>
             </div>
           </div>
 
@@ -204,12 +234,12 @@
     // 表单切换功能
     const loginTab = document.getElementById('login-tab');
     const registerTab = document.getElementById('register-tab');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
+    const loginFormWrapper = document.getElementById('login-form');
+    const registerFormWrapper = document.getElementById('register-form');
 
     loginTab.addEventListener('click', () => {
-      loginForm.classList.remove('hidden');
-      registerForm.classList.add('hidden');
+      loginFormWrapper.classList.remove('hidden');
+      registerFormWrapper.classList.add('hidden');
       loginTab.classList.add('text-white', 'border-primary');
       loginTab.classList.remove('text-gray-400');
       registerTab.classList.add('text-gray-400');
@@ -217,8 +247,8 @@
     });
 
     registerTab.addEventListener('click', () => {
-      registerForm.classList.remove('hidden');
-      loginForm.classList.add('hidden');
+      registerFormWrapper.classList.remove('hidden');
+      loginFormWrapper.classList.add('hidden');
       registerTab.classList.add('text-white', 'border-primary');
       registerTab.classList.remove('text-gray-400');
       loginTab.classList.add('text-gray-400');
@@ -231,7 +261,7 @@
         const targetId = button.getAttribute('data-target');
         const passwordInput = document.getElementById(targetId);
         const icon = button.querySelector('i');
-        
+
         if (passwordInput.type === 'password') {
           passwordInput.type = 'text';
           icon.classList.remove('fa-eye-slash');
@@ -244,23 +274,49 @@
       });
     });
 
-    // 表单提交处理
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // 在实际应用中，这里会有AJAX请求到后端
-        const isLoginForm = form.closest('#login-form') !== null;
-        const message = isLoginForm ? '登录成功！正在跳转...' : '注册成功！正在跳转...';
-        
-        // 显示成功消息（实际应用中会有更复杂的处理）
-        alert(message);
-      });
+    // 登录表单提交
+    const loginForm = document.getElementById('login-form-element');
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const identifier = loginForm.identifier.value.trim();
+      const password = loginForm.password.value.trim();
+
+      if (!identifier || !password) {
+        alert('请输入完整的登录信息');
+        return;
+      }
+
+      // 在实际项目中这里应向后端发送 AJAX 请求，例如：/api/auth/login
+      alert('登录成功！正在跳转到首页...');
+    });
+
+    // 注册表单提交
+    const registerForm = document.getElementById('register-form-element');
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const username = registerForm.username.value.trim();
+      const phone = registerForm.phone.value.trim();
+      const password = registerForm.password.value.trim();
+      const confirm = registerForm.confirmPassword.value.trim();
+
+      if (password !== confirm) {
+        alert('两次输入的密码不一致');
+        return;
+      }
+
+      if (!/^1[3-9]\d{9}$/.test(phone)) {
+        alert('请输入有效的11位手机号');
+        return;
+      }
+
+      // 实际项目应向后端发送 AJAX 请求，例如：/api/auth/register
+      alert('注册成功！欢迎加入 Critiq。');
     });
 
     // 添加页面载入动画
     window.addEventListener('load', () => {
-      document.body.classList.add('opacity-100');
       document.body.classList.remove('opacity-0');
     });
   </script>
