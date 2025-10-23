@@ -84,14 +84,14 @@
 
         <form class="space-y-5">
           <div>
-            <label for="login-email" class="block text-sm font-medium mb-1.5">邮箱</label>
+            <label for="login-username" class="block text-sm font-medium mb-1.5">用户名</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i class="fa fa-envelope text-gray-500"></i>
+                <i class="fa fa-user text-gray-500"></i>
               </div>
-              <input type="email" id="login-email" 
+              <input type="text" id="login-username" name="username"
                 class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="your@email.com" required>
+                placeholder="输入用户名" autocomplete="username" required>
             </div>
           </div>
 
@@ -104,9 +104,9 @@
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <i class="fa fa-lock text-gray-500"></i>
               </div>
-              <input type="password" id="login-password" 
+              <input type="password" id="login-password"
                 class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
-                placeholder="输入密码" required>
+                placeholder="输入密码" autocomplete="current-password" required>
               <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="login-password">
                 <i class="fa fa-eye-slash"></i>
               </button>
@@ -116,6 +116,7 @@
           <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg btn-hover">
             登录
           </button>
+          <p id="login-message" class="text-sm text-red-400 hidden"></p>
         </form>
 
         <div class="relative flex items-center">
@@ -244,19 +245,91 @@
       });
     });
 
-    // 表单提交处理
-    document.querySelectorAll('form').forEach(form => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // 在实际应用中，这里会有AJAX请求到后端
-        const isLoginForm = form.closest('#login-form') !== null;
-        const message = isLoginForm ? '登录成功！正在跳转...' : '注册成功！正在跳转...';
-        
-        // 显示成功消息（实际应用中会有更复杂的处理）
-        alert(message);
+    const loginFormElement = document.querySelector('#login-form form');
+    const registerFormElement = document.querySelector('#register-form form');
+    const loginMessageElement = document.getElementById('login-message');
+
+    const showLoginMessage = (message, type = 'error') => {
+      if (!loginMessageElement) return;
+      loginMessageElement.textContent = message;
+      loginMessageElement.classList.remove('hidden', 'text-red-400', 'text-green-400');
+      loginMessageElement.classList.add(type === 'success' ? 'text-green-400' : 'text-red-400');
+    };
+
+    const clearLoginMessage = () => {
+      if (!loginMessageElement) return;
+      loginMessageElement.textContent = '';
+      loginMessageElement.classList.add('hidden');
+    };
+
+    if (loginFormElement) {
+      const loginSubmitButton = loginFormElement.querySelector('button[type="submit"]');
+      const defaultButtonText = loginSubmitButton ? loginSubmitButton.textContent : '';
+
+      loginFormElement.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        clearLoginMessage();
+
+        const usernameInput = document.getElementById('login-username');
+        const passwordInput = document.getElementById('login-password');
+
+        const username = usernameInput ? usernameInput.value.trim() : '';
+        const password = passwordInput ? passwordInput.value : '';
+
+        if (!username || !password) {
+          showLoginMessage('请输入用户名和密码');
+          return;
+        }
+
+        if (loginSubmitButton) {
+          loginSubmitButton.disabled = true;
+          loginSubmitButton.textContent = '登录中...';
+          loginSubmitButton.classList.add('opacity-70', 'cursor-not-allowed');
+        }
+
+        try {
+          const body = new URLSearchParams({ username, password }).toString();
+          const response = await fetch('/user/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body
+          });
+
+          if (!response.ok) {
+            throw new Error('网络异常');
+          }
+
+          const result = await response.json();
+          if (result && result.code === 'SUCCESS' && result.data) {
+            localStorage.setItem('user_token_header', result.data);
+            localStorage.setItem('username', username);
+            showLoginMessage('登录成功，正在跳转...', 'success');
+            window.location.href = '电影推荐.html';
+          } else {
+            const errMsg = (result && result.errMsg) ? result.errMsg : '登录失败，请检查账号或密码';
+            showLoginMessage(errMsg);
+          }
+        } catch (error) {
+          console.error('登录失败', error);
+          showLoginMessage('登录过程中出现问题，请稍后重试');
+        } finally {
+          if (loginSubmitButton) {
+            loginSubmitButton.disabled = false;
+            loginSubmitButton.textContent = defaultButtonText;
+            loginSubmitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+          }
+        }
       });
-    });
+    }
+
+    if (registerFormElement) {
+      registerFormElement.addEventListener('submit', (event) => {
+        event.preventDefault();
+        alert('注册功能即将上线，敬请期待！');
+      });
+    }
 
     // 添加页面载入动画
     window.addEventListener('load', () => {
