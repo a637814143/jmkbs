@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电影评论平台</title>
+  <!-- 引入外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E50914', // 电影红
+            secondary: '#0F172A', // 深蓝黑
+            accent: '#F59E0B', // 金色点缀
+            neutral: '#1E293B', // 中性深灰
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <!-- 自定义工具类 -->
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      .film-grain {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+      }
+      .input-focus {
+        @apply focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none;
+      }
+      .btn-hover {
+        @apply hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 transition-all duration-300;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-secondary text-gray-100 min-h-screen font-sans film-grain">
+  <!-- 背景装饰 -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/3 -left-20 w-72 h-72 bg-accent/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10 container mx-auto px-4 py-12 md:py-24 flex flex-col items-center justify-center min-h-screen">
+    <!-- 网站标志 -->
+    <div class="mb-10 text-center">
+      <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold text-white flex items-center justify-center gap-2">
+        <i class="fa fa-film text-primary"></i>
+        <span>Critiq</span>
+      </h1>
+    </div>
+
+    <!-- 表单卡片 -->
+    <div class="w-full max-w-md bg-neutral/80 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-gray-800">
+      <!-- 表单切换标签 -->
+      <div class="flex border-b border-gray-800">
+        <button id="login-tab" class="flex-1 py-4 px-6 text-center font-medium text-white border-b-2 border-primary transition-all">
+          登录
+        </button>
+        <button id="register-tab" class="flex-1 py-4 px-6 text-center font-medium text-gray-400 hover:text-gray-300 transition-all">
+          注册
+        </button>
+      </div>
+
+      <!-- 登录表单 -->
+      <div id="login-form" class="p-6 md:p-8 space-y-6">
+        <h2 class="text-2xl font-bold text-shadow">欢迎回来</h2>
+        <p class="text-gray-400">登录你的账号，继续探索电影世界</p>
+
+        <form class="space-y-5">
+          <div>
+            <label for="login-email" class="block text-sm font-medium mb-1.5">邮箱</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fa fa-envelope text-gray-500"></i>
+              </div>
+              <input type="email" id="login-email" 
+                class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                placeholder="your@email.com" required>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between items-center mb-1.5">
+              <label for="login-password" class="block text-sm font-medium">密码</label>
+              <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">忘记密码?</a>
+            </div>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fa fa-lock text-gray-500"></i>
+              </div>
+              <input type="password" id="login-password" 
+                class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                placeholder="输入密码" required>
+              <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="login-password">
+                <i class="fa fa-eye-slash"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg btn-hover">
+            登录
+          </button>
+        </form>
+
+        <div class="relative flex items-center">
+          <div class="flex-grow h-px bg-gray-700"></div>
+          <span class="px-3 text-sm text-gray-500">或使用以下方式登录</span>
+          <div class="flex-grow h-px bg-gray-700"></div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">
+            <i class="fa fa-google text-gray-400"></i>
+          </button>
+          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">
+            <i class="fa fa-facebook text-gray-400"></i>
+          </button>
+          <button class="flex items-center justify-center py-2.5 rounded-lg border border-gray-700 hover:bg-gray-800 transition-colors">
+            <i class="fa fa-twitter text-gray-400"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 注册表单 -->
+      <div id="register-form" class="p-6 md:p-8 space-y-6 hidden">
+        <h2 class="text-2xl font-bold text-shadow">创建账号</h2>
+        <p class="text-gray-400">加入我们，分享你的电影评论</p>
+
+        <form class="space-y-5">
+          <div>
+            <label for="register-name" class="block text-sm font-medium mb-1.5">用户名</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fa fa-user text-gray-500"></i>
+              </div>
+              <input type="text" id="register-name" 
+                class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                placeholder="你的昵称" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="register-email" class="block text-sm font-medium mb-1.5">邮箱</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fa fa-envelope text-gray-500"></i>
+              </div>
+              <input type="email" id="register-email" 
+                class="w-full pl-10 pr-4 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                placeholder="your@email.com" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="register-password" class="block text-sm font-medium mb-1.5">密码</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fa fa-lock text-gray-500"></i>
+              </div>
+              <input type="password" id="register-password" 
+                class="w-full pl-10 pr-10 py-3 rounded-lg bg-gray-900/50 border border-gray-700 text-gray-100 input-focus transition-all"
+                placeholder="至少8个字符" required minlength="8">
+              <button type="button" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-300 transition-colors toggle-password" data-target="register-password">
+                <i class="fa fa-eye-slash"></i>
+              </button>
+            </div>
+            <p class="mt-1.5 text-xs text-gray-500">密码需包含字母和数字，至少8个字符</p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input id="terms" type="checkbox" class="w-4 h-4 rounded border-gray-600 bg-gray-900 text-primary focus:ring-primary/50 transition-all" required>
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="terms" class="text-gray-400">我同意<a href="#" class="text-primary hover:underline">服务条款</a>和<a href="#" class="text-primary hover:underline">隐私政策</a></label>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg btn-hover">
+            注册
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 表单切换功能
+    const loginTab = document.getElementById('login-tab');
+    const registerTab = document.getElementById('register-tab');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+
+    loginTab.addEventListener('click', () => {
+      loginForm.classList.remove('hidden');
+      registerForm.classList.add('hidden');
+      loginTab.classList.add('text-white', 'border-primary');
+      loginTab.classList.remove('text-gray-400');
+      registerTab.classList.add('text-gray-400');
+      registerTab.classList.remove('text-white', 'border-primary');
+    });
+
+    registerTab.addEventListener('click', () => {
+      registerForm.classList.remove('hidden');
+      loginForm.classList.add('hidden');
+      registerTab.classList.add('text-white', 'border-primary');
+      registerTab.classList.remove('text-gray-400');
+      loginTab.classList.add('text-gray-400');
+      loginTab.classList.remove('text-white', 'border-primary');
+    });
+
+    // 密码显示/隐藏功能
+    document.querySelectorAll('.toggle-password').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('data-target');
+        const passwordInput = document.getElementById(targetId);
+        const icon = button.querySelector('i');
+        
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          icon.classList.remove('fa-eye-slash');
+          icon.classList.add('fa-eye');
+        } else {
+          passwordInput.type = 'password';
+          icon.classList.remove('fa-eye');
+          icon.classList.add('fa-eye-slash');
+        }
+      });
+    });
+
+    // 表单提交处理
+    document.querySelectorAll('form').forEach(form => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // 在实际应用中，这里会有AJAX请求到后端
+        const isLoginForm = form.closest('#login-form') !== null;
+        const message = isLoginForm ? '登录成功！正在跳转...' : '注册成功！正在跳转...';
+        
+        // 显示成功消息（实际应用中会有更复杂的处理）
+        alert(message);
+      });
+    });
+
+    // 添加页面载入动画
+    window.addEventListener('load', () => {
+      document.body.classList.add('opacity-100');
+      document.body.classList.remove('opacity-0');
+    });
+  </script>
+</body>
+</html>

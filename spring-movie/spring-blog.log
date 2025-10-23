@@ -1,0 +1,189 @@
+2025-10-23T16:57:02.695+08:00  INFO 12312 --- [main] com.dali.movie.SpringMovieApplication    : Starting SpringMovieApplication using Java 17.0.14 with PID 12312 (D:\program\毕设\spring-movie\target\classes started by 86151 in D:\program\毕设\spring-movie)
+2025-10-23T16:57:02.698+08:00  INFO 12312 --- [main] com.dali.movie.SpringMovieApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-23T16:57:03.699+08:00  INFO 12312 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-23T16:57:03.709+08:00  INFO 12312 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-23T16:57:03.709+08:00  INFO 12312 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-23T16:57:03.759+08:00  INFO 12312 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-23T16:57:03.759+08:00  INFO 12312 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1017 ms
+2025-10-23T16:57:04.652+08:00  INFO 12312 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-23T16:57:04.664+08:00  INFO 12312 --- [main] com.dali.movie.SpringMovieApplication    : Started SpringMovieApplication in 2.383 seconds (process running for 2.642)
+2025-10-23T16:57:11.606+08:00  INFO 12312 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23T16:57:11.607+08:00  INFO 12312 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-23T16:57:11.614+08:00  INFO 12312 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
+2025-10-23T16:57:11.676+08:00  INFO 12312 --- [http-nio-8080-exec-1] c.dali.movie.controller.UserController   : UserController#login接收参数: username:null, password:null
+2025-10-23T17:02:15.289+08:00  INFO 12312 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-23T17:02:15.399+08:00  INFO 12312 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-23T17:02:18.295+08:00  INFO 19140 --- [main] com.dali.movie.SpringMovieApplication    : Starting SpringMovieApplication using Java 17.0.14 with PID 19140 (D:\program\毕设\spring-movie\target\classes started by 86151 in D:\program\毕设\spring-movie)
+2025-10-23T17:02:18.296+08:00  INFO 19140 --- [main] com.dali.movie.SpringMovieApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-23T17:02:19.309+08:00  INFO 19140 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-23T17:02:19.365+08:00  INFO 19140 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1027 ms
+2025-10-23T17:02:20.201+08:00  INFO 19140 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-23T17:02:20.213+08:00  INFO 19140 --- [main] com.dali.movie.SpringMovieApplication    : Started SpringMovieApplication in 2.34 seconds (process running for 2.59)
+2025-10-23T17:02:20.217+08:00  INFO 19140 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-23T17:02:20.333+08:00  INFO 19140 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-23T17:02:22.247+08:00  INFO 25220 --- [main] com.dali.movie.SpringMovieApplication    : Starting SpringMovieApplication using Java 17.0.14 with PID 25220 (D:\program\毕设\spring-movie\target\classes started by 86151 in D:\program\毕设\spring-movie)
+2025-10-23T17:02:22.249+08:00  INFO 25220 --- [main] com.dali.movie.SpringMovieApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-23T17:02:23.374+08:00  INFO 25220 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-23T17:02:23.385+08:00  INFO 25220 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-23T17:02:23.385+08:00  INFO 25220 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-23T17:02:23.431+08:00  INFO 25220 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-23T17:02:23.431+08:00  INFO 25220 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1133 ms
+2025-10-23T17:02:24.168+08:00  INFO 25220 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-23T17:02:24.177+08:00  INFO 25220 --- [main] com.dali.movie.SpringMovieApplication    : Started SpringMovieApplication in 2.522 seconds (process running for 2.774)
+2025-10-23T17:02:28.592+08:00  INFO 25220 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23T17:02:28.592+08:00  INFO 25220 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-23T17:02:28.592+08:00  INFO 25220 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-10-23T17:02:28.627+08:00  INFO 25220 --- [http-nio-8080-exec-1] c.dali.movie.controller.UserController   : UserController#login接收参数: username:null, password:null
+2025-10-23T17:02:30.910+08:00  INFO 25220 --- [http-nio-8080-exec-6] c.dali.movie.controller.UserController   : UserController#login接收参数: username:null, password:null
+2025-10-23T17:02:45.911+08:00  INFO 25220 --- [http-nio-8080-exec-9] c.dali.movie.controller.UserController   : UserController#login接收参数: username:null, password:null
+2025-10-23T17:04:27.979+08:00  INFO 25220 --- [http-nio-8080-exec-5] c.dali.movie.controller.UserController   : UserController#login接收参数: username:zhangsan, password:123456
+2025-10-23T17:04:27.997+08:00  INFO 25220 --- [http-nio-8080-exec-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-23T17:04:28.179+08:00  INFO 25220 --- [http-nio-8080-exec-5] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6bca54c5
+2025-10-23T17:04:28.181+08:00  INFO 25220 --- [http-nio-8080-exec-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-23T17:04:28.375+08:00 ERROR 25220 --- [http-nio-8080-exec-5] com.dali.movie.config.ExceptionHandle    : 发生异常，e:
+
+org.springframework.jdbc.BadSqlGrammarException: 
+### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table 'java_blog_spring.users' doesn't exist
+### The error may exist in com/dali/movie/mapper/UsersInfoMapper.java (best guess)
+### The error may involve com.dali.movie.mapper.UsersInfoMapper.selectByName-Inline
+### The error occurred while setting parameters
+### SQL: select * from users where status =1 and username = ?
+### Cause: java.sql.SQLSyntaxErrorException: Table 'java_blog_spring.users' doesn't exist
+; bad SQL grammar []
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.doTranslate(SQLErrorCodeSQLExceptionTranslator.java:246) ~[spring-jdbc-6.2.11.jar:6.2.11]
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.2.11.jar:6.2.11]
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:95) ~[mybatis-spring-3.0.5.jar:3.0.5]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:347) ~[mybatis-spring-3.0.5.jar:3.0.5]
+	at jdk.proxy2/jdk.proxy2.$Proxy66.selectOne(Unknown Source) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate.selectOne(SqlSessionTemplate.java:154) ~[mybatis-spring-3.0.5.jar:3.0.5]
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:87) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86) ~[mybatis-3.5.19.jar:3.5.19]
+	at jdk.proxy2/jdk.proxy2.$Proxy68.selectByName(Unknown Source) ~[na:na]
+	at com.dali.movie.service.UsersService.selectByName(UsersService.java:17) ~[classes/:na]
+	at com.dali.movie.controller.UserController.login(UserController.java:38) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:258) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:191) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:118) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:991) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:896) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1089) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:979) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.11.jar:6.2.11]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.46.jar:6.0]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.11.jar:6.2.11]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:116) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:398) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:903) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1776) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:975) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:493) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.46.jar:10.1.46]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+Caused by: java.sql.SQLSyntaxErrorException: Table 'java_blog_spring.users' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:112) ~[mysql-connector-j-9.4.0.jar:9.4.0]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114) ~[mysql-connector-j-9.4.0.jar:9.4.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:988) ~[mysql-connector-j-9.4.0.jar:9.4.0]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.execute(ClientPreparedStatement.java:383) ~[mysql-connector-j-9.4.0.jar:9.4.0]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.execute(ProxyPreparedStatement.java:44) ~[HikariCP-6.3.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.execute(HikariProxyPreparedStatement.java) ~[HikariCP-6.3.3.jar:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.apache.ibatis.logging.jdbc.PreparedStatementLogger.invoke(PreparedStatementLogger.java:58) ~[mybatis-3.5.19.jar:3.5.19]
+	at jdk.proxy3/jdk.proxy3.$Proxy73.execute(Unknown Source) ~[na:na]
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.query(PreparedStatementHandler.java:65) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.query(RoutingStatementHandler.java:80) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.executor.SimpleExecutor.doQuery(SimpleExecutor.java:65) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.executor.BaseExecutor.queryFromDatabase(BaseExecutor.java:336) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.executor.BaseExecutor.query(BaseExecutor.java:158) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:110) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:90) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:154) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:147) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:142) ~[mybatis-3.5.19.jar:3.5.19]
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:75) ~[mybatis-3.5.19.jar:3.5.19]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569) ~[na:na]
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:333) ~[mybatis-spring-3.0.5.jar:3.0.5]
+	... 58 common frames omitted
+
+2025-10-23T17:08:24.027+08:00  INFO 25220 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-23T17:08:24.126+08:00  INFO 25220 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-23T17:08:24.129+08:00  INFO 25220 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-23T17:08:24.136+08:00  INFO 25220 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-23T17:08:25.927+08:00  INFO 13272 --- [main] com.dali.movie.SpringMovieApplication    : Starting SpringMovieApplication using Java 17.0.14 with PID 13272 (D:\program\毕设\spring-movie\target\classes started by 86151 in D:\program\毕设\spring-movie)
+2025-10-23T17:08:25.931+08:00  INFO 13272 --- [main] com.dali.movie.SpringMovieApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-23T17:08:27.009+08:00  INFO 13272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-23T17:08:27.019+08:00  INFO 13272 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-23T17:08:27.020+08:00  INFO 13272 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-23T17:08:27.066+08:00  INFO 13272 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-23T17:08:27.067+08:00  INFO 13272 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1093 ms
+2025-10-23T17:08:27.707+08:00  INFO 13272 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-23T17:08:27.716+08:00  INFO 13272 --- [main] com.dali.movie.SpringMovieApplication    : Started SpringMovieApplication in 2.216 seconds (process running for 2.468)
+2025-10-23T17:08:30.124+08:00  INFO 13272 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23T17:08:30.124+08:00  INFO 13272 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-23T17:08:30.126+08:00  INFO 13272 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-10-23T17:08:30.157+08:00  INFO 13272 --- [http-nio-8080-exec-1] c.dali.movie.controller.UserController   : UserController#login接收参数: username:zhangsan, password:123456
+2025-10-23T17:08:30.174+08:00  INFO 13272 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-23T17:08:30.302+08:00  INFO 13272 --- [http-nio-8080-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5b75f9b1
+2025-10-23T17:08:30.303+08:00  INFO 13272 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-23T17:08:30.364+08:00 ERROR 13272 --- [http-nio-8080-exec-1] c.dali.movie.controller.UserController   : 密码错误
+2025-10-23T17:10:53.058+08:00  INFO 13272 --- [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-10-23T17:10:53.176+08:00  INFO 13272 --- [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-10-23T17:10:53.177+08:00  INFO 13272 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-23T17:10:53.182+08:00  INFO 13272 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-23T17:10:54.982+08:00  INFO 19472 --- [main] com.dali.movie.SpringMovieApplication    : Starting SpringMovieApplication using Java 17.0.14 with PID 19472 (D:\program\毕设\spring-movie\target\classes started by 86151 in D:\program\毕设\spring-movie)
+2025-10-23T17:10:54.986+08:00  INFO 19472 --- [main] com.dali.movie.SpringMovieApplication    : No active profile set, falling back to 1 default profile: "default"
+2025-10-23T17:10:56.118+08:00  INFO 19472 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-23T17:10:56.128+08:00  INFO 19472 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-23T17:10:56.128+08:00  INFO 19472 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.46]
+2025-10-23T17:10:56.182+08:00  INFO 19472 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-23T17:10:56.182+08:00  INFO 19472 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1149 ms
+2025-10-23T17:10:56.953+08:00  INFO 19472 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-23T17:10:56.962+08:00  INFO 19472 --- [main] com.dali.movie.SpringMovieApplication    : Started SpringMovieApplication in 2.469 seconds (process running for 2.723)
+2025-10-23T17:10:59.298+08:00  INFO 19472 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-23T17:10:59.298+08:00  INFO 19472 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-23T17:10:59.299+08:00  INFO 19472 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-10-23T17:10:59.328+08:00  INFO 19472 --- [http-nio-8080-exec-1] c.dali.movie.controller.UserController   : UserController#login接收参数: username:zhangsan, password:123456
+2025-10-23T17:10:59.343+08:00  INFO 19472 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-23T17:10:59.497+08:00  INFO 19472 --- [http-nio-8080-exec-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5b75f9b1
+2025-10-23T17:10:59.498+08:00  INFO 19472 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-23T17:10:59.559+08:00 ERROR 19472 --- [http-nio-8080-exec-1] c.dali.movie.controller.UserController   : 密码错误
+2025-10-23T17:11:00.660+08:00  INFO 19472 --- [http-nio-8080-exec-2] c.dali.movie.controller.UserController   : UserController#login接收参数: username:zhangsan, password:123456
+2025-10-23T17:11:00.664+08:00 ERROR 19472 --- [http-nio-8080-exec-2] c.dali.movie.controller.UserController   : 密码错误
