@@ -1,4 +1,4 @@
-"""Simple utility to verify that the database credentials work."""
+"""命令行工具：验证与 jmk_movie 数据库的连接。"""
 
 from __future__ import annotations
 
@@ -7,51 +7,47 @@ import sys
 
 from pymysql.err import OperationalError
 
-from .db_connection import create_connection, resolve_connection_settings
+from .db_connection import DatabaseSettings, create_connection
 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--host", help="Database host override")
-    parser.add_argument("--port", type=int, help="Database port override")
-    parser.add_argument("--database", help="Database name override")
-    parser.add_argument("--user", help="Database user override")
-    parser.add_argument("--password", help="Database password override")
+    parser.add_argument("--host", help="数据库主机")
+    parser.add_argument("--port", type=int, help="数据库端口")
+    parser.add_argument("--database", help="数据库名称")
+    parser.add_argument("--user", help="数据库用户名")
+    parser.add_argument("--password", help="数据库密码")
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
     overrides = {
-        key: value
-        for key, value in {
-            "host": args.host,
-            "port": args.port,
-            "database": args.database,
-            "user": args.user,
-            "password": args.password,
-        }.items()
-        if value is not None
+        key: getattr(args, key)
+        for key in ["host", "port", "database", "user", "password"]
+        if getattr(args, key) is not None
     }
 
-    settings = resolve_connection_settings(**overrides)
-    print("Attempting to connect with settings:")
-    print(
-        f"  host={settings['host']} port={settings['port']}\n"
-        f"  database={settings['database']} user={settings['user']}"
-    )
+    settings = DatabaseSettings.from_env(**overrides)
+    print("尝试连接，当前设置：")
+    for key, value in settings.as_dict().items():
+        if key == "password":
+            display = "***" if value else ""
+        else:
+            display = value
+        print(f"  {key}: {display}")
 
     try:
-        connection = create_connection(**overrides)
+        connection = create_connection(settings=settings)
     except OperationalError as exc:
-        print("Connection failed:", exc)
+        print("连接失败：", exc)
         return 1
 
     with connection:
         with connection.cursor() as cursor:
             cursor.execute("SELECT 1")
-            result = cursor.fetchone()
-    print("Connection successful, SELECT 1 returned:", result)
+            row = cursor.fetchone()
+    print("连接成功，SELECT 1 返回：", row)
     return 0
 
 

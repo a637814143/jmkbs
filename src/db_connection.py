@@ -1,122 +1,116 @@
-"""Helpers for connecting to the project's MySQL database.
-
-The connection helper centralises the configuration that the rest of the
-application should use when opening a database session.  By default, it reads
-settings from environment variables so secrets do not have to be committed to
-source control, but sensible defaults are provided for local development.
-
-Example
--------
->>> from src.db_connection import create_connection
->>> connection = create_connection()
->>> with connection.cursor() as cursor:
-...     cursor.execute("SELECT 1")
-...     cursor.fetchone()
-{'1': 1}
-"""
+"""数据库连接与配置工具。"""
 
 from __future__ import annotations
 
 import os
-from typing import Any, Dict, Optional
+from dataclasses import asdict, dataclass, fields, replace
+from typing import Any, Dict, Optional, Type
 
 import pymysql
 from pymysql.connections import Connection
 
-DEFAULT_DATABASE = "jmk_movie"
-DEFAULT_USER = "root"
-DEFAULT_PASSWORD = "123456"
-DEFAULT_HOST = "localhost"
-DEFAULT_PORT = 3306
+_ENV_MAP = {
+    "host": "JMK_DB_HOST",
+    "port": "JMK_DB_PORT",
+    "database": "JMK_DB_NAME",
+    "user": "JMK_DB_USER",
+    "password": "JMK_DB_PASS",
+}
 
 
-def _coerce_port(value: Optional[Any], *, default: int) -> int:
-    """Convert a port value to :class:`int`, falling back to ``default``."""
-    if value is None:
-        return default
+@dataclass(frozen=True)
+class DatabaseSettings:
+    """保存数据库连接设置的不可变对象。"""
+
+    host: str = "localhost"
+    port: int = 3306
+    database: str = "jmk_movie"
+    user: str = "root"
+    password: str = "123456"
+
+    @classmethod
+    def from_env(cls, **overrides: Any) -> "DatabaseSettings":
+        """根据环境变量和传入的覆盖值创建设置对象。"""
+
+        base = cls()
+        env_values: Dict[str, Any] = {}
+        for field, env_name in _ENV_MAP.items():
+            value = os.getenv(env_name)
+            if value is None:
+                continue
+            if field == "port":
+                value = _ensure_port(value)
+            env_values[field] = value
+        return base.with_overrides(**env_values, **overrides)
+
+    def with_overrides(self, **overrides: Any) -> "DatabaseSettings":
+        """返回应用覆盖值后的新设置对象。"""
+
+        prepared: Dict[str, Any] = {}
+        for key, value in overrides.items():
+            if key not in _SETTINGS_KEYS or value is None:
+                continue
+            if key == "port":
+                prepared[key] = _ensure_port(value)
+            else:
+                prepared[key] = value
+        if not prepared:
+            return self
+        return replace(self, **prepared)
+
+    def as_dict(self) -> Dict[str, Any]:
+        return asdict(self)
+
+
+def _ensure_port(value: Any) -> int:
     if isinstance(value, int):
         return value
     try:
         return int(str(value))
-    except (TypeError, ValueError) as exc:  # pragma: no cover - defensive
-        raise ValueError(f"Invalid port value: {value!r}") from exc
+    except (TypeError, ValueError) as exc:  # pragma: no cover - 防御性处理
+        raise ValueError(f"无效的端口值: {value!r}") from exc
 
 
-def resolve_connection_settings(
-    *,
-    host: Optional[str] = None,
-    port: Optional[int] = None,
-    database: Optional[str] = None,
-    user: Optional[str] = None,
-    password: Optional[str] = None,
-) -> Dict[str, Any]:
-    """Resolve connection settings using parameters and environment variables.
+def load_settings(**overrides: Any) -> DatabaseSettings:
+    """读取环境变量并应用覆盖值，生成最终设置。"""
 
-    Parameters take precedence over environment variables, which in turn fall
-    back to hard-coded defaults that match the values provided in the task
-    description.
-    """
-
-    resolved_host = host or os.getenv("DB_HOST", DEFAULT_HOST)
-    resolved_port = _coerce_port(port or os.getenv("DB_PORT"), default=DEFAULT_PORT)
-    resolved_database = database or os.getenv("DB_NAME", DEFAULT_DATABASE)
-    resolved_user = user or os.getenv("DB_USER", DEFAULT_USER)
-    resolved_password = password or os.getenv("DB_PASSWORD", DEFAULT_PASSWORD)
-
-    return {
-        "host": resolved_host,
-        "port": resolved_port,
-        "database": resolved_database,
-        "user": resolved_user,
-        "password": resolved_password,
-    }
+    return DatabaseSettings.from_env(**overrides)
 
 
 def create_connection(
     *,
-    host: Optional[str] = None,
-    port: Optional[int] = None,
-    database: Optional[str] = None,
-    user: Optional[str] = None,
-    password: Optional[str] = None,
-    charset: str = "utf8mb4",
-    cursorclass: Any = pymysql.cursors.DictCursor,
+    settings: Optional[DatabaseSettings] = None,
     autocommit: bool = True,
+    cursorclass: Type[pymysql.cursors.Cursor] = pymysql.cursors.DictCursor,
+    charset: str = "utf8mb4",
     connect_timeout: int = 10,
+    **overrides: Any,
 ) -> Connection:
-    """Create and return a new MySQL connection.
+    """创建并返回一个 PyMySQL 连接。"""
 
-    Parameters can be supplied to override the defaults.  When omitted, the
-    function will use environment variables (``DB_HOST``, ``DB_PORT``,
-    ``DB_NAME``, ``DB_USER``, ``DB_PASSWORD``) with the task's credentials as a
-    final fallback.  The returned connection is configured with autocommit
-    enabled by default, making it convenient for simple scripts.
-    """
+    if settings is None:
+        settings = load_settings(**overrides)
+    else:
+        settings = settings.with_overrides(**overrides)
 
-    settings = resolve_connection_settings(
-        host=host,
-        port=port,
-        database=database,
-        user=user,
-        password=password,
-    )
-
-    connection = pymysql.connect(
-        host=settings["host"],
-        port=settings["port"],
-        db=settings["database"],
-        user=settings["user"],
-        password=settings["password"],
-        charset=charset,
-        cursorclass=cursorclass,
+    return pymysql.connect(
+        host=settings.host,
+        port=settings.port,
+        db=settings.database,
+        user=settings.user,
+        password=settings.password,
         autocommit=autocommit,
+        cursorclass=cursorclass,
+        charset=charset,
         connect_timeout=connect_timeout,
     )
 
-    return connection
 
+_SETTINGS_FIELDS = fields(DatabaseSettings)
+_SETTINGS_KEYS = {field.name for field in _SETTINGS_FIELDS}
 
 __all__ = [
+    "DatabaseSettings",
     "create_connection",
-    "resolve_connection_settings",
+    "load_settings",
 ]
