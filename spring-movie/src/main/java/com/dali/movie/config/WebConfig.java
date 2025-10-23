@@ -16,7 +16,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private LoginInterceptor loginInterceptor;
 
-    private final List excludes =  Arrays.asList(
+    private final List<String> excludes =  Arrays.asList(
+            "/",
+            "/index.html",
+            "/首页.html",
             "/**/*.html",
             "/blog-editormd/**",
             "/css/**",
