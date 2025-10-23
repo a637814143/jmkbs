@@ -1,14 +1,17 @@
 package com.example.movie.auth.dto;
 
-import jakarta.validation.constraints.Email;
+import com.example.movie.domain.user.UserRole;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
 
 public class RegisterRequest {
 
     @NotBlank
-    @Email
-    private String email;
+    @Size(min = 3, max = 50)
+    @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "用户名仅支持字母、数字和下划线")
+    private String username;
 
     @NotBlank
     @Size(min = 6, max = 64)
@@ -21,12 +24,14 @@ public class RegisterRequest {
     @Size(max = 255)
     private String avatarUrl;
 
-    public String getEmail() {
-        return email;
+    private UserRole role;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -51,5 +56,13 @@ public class RegisterRequest {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

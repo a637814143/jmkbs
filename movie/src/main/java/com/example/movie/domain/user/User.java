@@ -19,8 +19,8 @@ public class User extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, length = 255)
-    private String email;
+    @Column(name = "email", nullable = false, unique = true, length = 255)
+    private String username;
 
     @Column(name = "password_hash", nullable = false, length = 255)
     private String passwordHash;
@@ -47,12 +47,12 @@ public class User extends BaseTimeEntity {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPasswordHash() {

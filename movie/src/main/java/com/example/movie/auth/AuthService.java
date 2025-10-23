@@ -27,15 +27,16 @@ public class AuthService {
 
     @Transactional
     public AuthUserView register(RegisterRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "邮箱已被注册");
+        if (userRepository.existsByUsername(request.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "用户名已被占用");
         }
         User user = new User();
-        user.setEmail(request.getEmail());
+        user.setUsername(request.getUsername());
         user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
         user.setNickname(request.getNickname());
         user.setAvatarUrl(request.getAvatarUrl());
-        user.setRole(UserRole.USER);
+        UserRole role = request.getRole() != null ? request.getRole() : UserRole.USER;
+        user.setRole(role);
         user.setStatus(UserStatus.ACTIVE);
         User savedUser = userRepository.save(user);
         return toView(savedUser);
@@ -43,10 +44,10 @@ public class AuthService {
 
     @Transactional(readOnly = true)
     public AuthUserView login(LoginRequest request) {
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "邮箱或密码错误"));
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名或密码错误"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "邮箱或密码错误");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "用户名或密码错误");
         }
         if (user.getStatus() != UserStatus.ACTIVE) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "账号不可用，请联系管理员");
@@ -55,6 +56,6 @@ public class AuthService {
     }
 
     private AuthUserView toView(User user) {
-        return new AuthUserView(user.getId(), user.getEmail(), user.getNickname(), user.getAvatarUrl(), user.getRole());
+        return new AuthUserView(user.getId(), user.getUsername(), user.getNickname(), user.getAvatarUrl(), user.getRole());
     }
 }
