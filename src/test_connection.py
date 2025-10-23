@@ -7,7 +7,7 @@ import sys
 
 from pymysql.err import OperationalError
 
-from .db_connection import DatabaseSettings, create_connection
+from .movie import DatabaseSettings, create_connection
 
 
 def parse_args() -> argparse.Namespace:
