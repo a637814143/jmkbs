@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电影分类 - 影享家</title>
+  <!-- 引入Font Awesome图标库 -->
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 引入CSS样式文件 -->
+  <link rel="stylesheet" href="/css/movie-category.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#" class="logo">影享家</a>
+      <div class="nav-menu">
+        <a href="#" class="nav-link active">首页</a>
+        <a href="#" class="nav-link">电影分类</a>
+        <a href="#" class="nav-link">热门推荐</a>
+        <a href="#" class="nav-link">排行榜</a>
+        <a href="#" class="nav-link">我的收藏</a>
+      </div>
+      <div class="search-box">
+        <input type="text" placeholder="搜索电影名称...">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+      </div>
+      <div class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="container">
+    <!-- 页面标题 -->
+    <div class="page-header">
+      <h1>电影分类浏览</h1>
+      <p>发现你喜欢的电影类型，探索更多精彩内容</p>
+    </div>
+
+    <!-- 分类筛选区 -->
+    <div class="category-filter">
+      <div class="filter-group">
+        <h3>类型筛选</h3>
+        <div class="filter-tags" id="genreFilter">
+          <button class="tag-btn active" data-genre="all">全部类型</button>
+          <button class="tag-btn" data-genre="action">动作</button>
+          <button class="tag-btn" data-genre="comedy">喜剧</button>
+          <button class="tag-btn" data-genre="drama">剧情</button>
+          <button class="tag-btn" data-genre="sci-fi">科幻</button>
+          <button class="tag-btn" data-genre="horror">恐怖</button>
+          <button class="tag-btn" data-genre="romance">爱情</button>
+          <button class="tag-btn" data-genre="animation">动画</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>年份筛选</h3>
+        <div class="filter-tags" id="yearFilter">
+          <button class="tag-btn active" data-year="all">全部年份</button>
+          <button class="tag-btn" data-year="2025">2025</button>
+          <button class="tag-btn" data-year="2024">2024</button>
+          <button class="tag-btn" data-year="2023">2023</button>
+          <button class="tag-btn" data-year="2020-2022">2020-2022</button>
+          <button class="tag-btn" data-year="before2020">2020年前</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <h3>排序方式</h3>
+        <div class="filter-tags" id="sortFilter">
+          <button class="tag-btn active" data-sort="popular">热门优先</button>
+          <button class="tag-btn" data-sort="newest">最新上映</button>
+          <button class="tag-btn" data-sort="rating">评分从高到低</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 电影列表区 -->
+    <div class="movie-grid" id="movieGrid">
+      <!-- 电影卡片将通过JavaScript动态渲染 -->
+    </div>
+
+    <!-- 加载更多按钮 -->
+    <div class="load-more">
+      <button id="loadMoreBtn" class="btn btn-primary">加载更多电影</button>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">影享家</div>
+        <div class="footer-links">
+          <a href="#">关于我们</a>
+          <a href="#">联系客服</a>
+          <a href="#">隐私政策</a>
+          <a href="#">用户协议</a>
+        </div>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-weibo"></i></a>
+          <a href="#"><i class="fab fa-weixin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="copyright">© 2025 影享家 版权所有</div>
+    </div>
+  </footer>
+
+  <!-- 引入JavaScript交互文件 -->
+  <script src="/js/movie-category.js"></script>
+</body>
+</html>

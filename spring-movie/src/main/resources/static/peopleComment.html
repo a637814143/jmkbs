@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的评论中心</title>
+    <link rel="stylesheet" href="/css/peopleComment.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部用户信息 -->
+        <div class="header">
+            <div class="user-avatar">陈</div>
+            <div class="user-info">
+                <div class="user-name">电影评论达人_小陈</div>
+                <div class="user-meta">
+                    <div class="stats-item">
+                        <span class="stats-value">28</span>篇评论
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-value">156</span>个赞
+                    </div>
+                    <div class="stats-item">
+                        <span class="stats-value">8</span>条回复
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary">编辑个人资料</button>
+        </div>
+
+        <!-- 筛选栏 -->
+        <div class="filter-bar">
+            <span class="filter-label">筛选：</span>
+            <select class="filter-select">
+                <option value="all">全部评论</option>
+                <option value="movie">电影评论</option>
+                <option value="tv">电视剧评论</option>
+                <option value="high-rated">高分评论</option>
+            </select>
+            <select class="filter-select">
+                <option value="latest">最新发布</option>
+                <option value="most-liked">最多点赞</option>
+                <option value="highest-rated">评分最高</option>
+            </select>
+            <input type="text" class="search-input" placeholder="搜索评论内容...">
+            <button class="btn btn-outline">搜索</button>
+        </div>
+
+        <!-- 评论列表 -->
+        <div class="comment-list">
+            <div class="comment-card">
+                <div class="comment-movie">
+                    <img src="https://picsum.photos/80/120?random=10" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">奥本海默</div>
+                        <div class="movie-meta">
+                            <span>剧情, 传记</span>
+                            <span>2023</span>
+                            <span class="comment-rating">★★★★☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-content">
+                    诺兰用非线性叙事完美展现了“原子弹之父”的复杂人生，道德与科学的博弈令人深思。电影的节奏和配乐都恰到好处，是近几年最好的传记片之一。
+                </div>
+                <span class="comment-time">2025-10-20 16:22</span>
+                <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-outline">查看详情</button>
+                    <button class="btn btn-outline">编辑</button>
+                </div>
+            </div>
+
+            <div class="comment-card">
+                <div class="comment-movie">
+                    <img src="https://picsum.photos/80/120?random=20" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">沙丘2</div>
+                        <div class="movie-meta">
+                            <span>科幻, 冒险</span>
+                            <span>2024</span>
+                            <span class="comment-rating">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-content">
+                    视觉盛宴！宏大的世界观和史诗级的战争场面让人震撼，配乐更是点睛之笔。期待下一部的剧情发展，沙丘宇宙太有魅力了。
+                </div>
+                <span class="comment-time">2025-10-15 09:45</span>
+                <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-outline">查看详情</button>
+                    <button class="btn btn-outline">编辑</button>
+                </div>
+            </div>
+
+            <div class="comment-card">
+                <div class="comment-movie">
+                    <img src="https://picsum.photos/80/120?random=30" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">瞬息全宇宙</div>
+                        <div class="movie-meta">
+                            <span>喜剧, 科幻</span>
+                            <span>2022</span>
+                            <span class="comment-rating">★★★☆☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-content">
+                    创意满分，但剧情后半段有些拖沓。杨紫琼的表演很精彩，多元宇宙的设定很有趣，适合喜欢奇幻题材的观众。
+                </div>
+                <span class="comment-time">2025-10-08 14:30</span>
+                <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-outline">查看详情</button>
+                    <button class="btn btn-outline">编辑</button>
+                </div>
+            </div>
+
+            <div class="comment-card">
+                <div class="comment-movie">
+                    <img src="https://picsum.photos/80/120?random=40" alt="电影海报" class="movie-poster">
+                    <div class="movie-info">
+                        <div class="movie-title">健听女孩</div>
+                        <div class="movie-meta">
+                            <span>剧情, 音乐</span>
+                            <span>2021</span>
+                            <span class="comment-rating">★★★★☆</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comment-content">
+                    温馨又治愈的故事，聋哑家庭的设定很新颖。女主的成长线和音乐梦想的追求都很动人，结局的处理也很温暖。
+                </div>
+                <span class="comment-time">2025-09-25 18:10</span>
+                <div style="margin-top: 10px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-outline">查看详情</button>
+                    <button class="btn btn-outline">编辑</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分页（简化版） -->
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="btn btn-outline">上一页</button>
+            <button class="btn btn-primary">1</button>
+            <button class="btn btn-outline">2</button>
+            <button class="btn btn-outline">3</button>
+            <button class="btn btn-outline">下一页</button>
+        </div>
+    </div>
+</body>
+</html>

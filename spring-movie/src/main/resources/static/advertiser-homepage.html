@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告商管理平台 - 首页</title>
+    <!-- 引入 Font Awesome 图标 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        /* 顶部导航栏 */
+        .header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .logo i {
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        .user-info span {
+            margin-right: 20px;
+        }
+        .logout-btn {
+            background-color: #e74c3c;
+            border: none;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .logout-btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* 主体内容区 */
+        .container {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+        /* 侧边栏 */
+        .sidebar {
+            width: 220px;
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px 0;
+        }
+        .menu-title {
+            padding: 0 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #bdc3c7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .menu-list {
+            list-style: none;
+        }
+        .menu-item {
+            margin-bottom: 5px;
+        }
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .menu-link:hover, .menu-link.active {
+            background-color: #2c3e50;
+            border-left: 4px solid #3498db;
+        }
+        .menu-link i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* 内容区域 */
+        .content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+        .page-title {
+            font-size: 24px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        /* 数据概览卡片 */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .stat-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e3f2fd;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 24px;
+        }
+        .stat-icon.ad-count {
+            background-color: #e8f5e9;
+            color: #2ecc71;
+        }
+        .stat-icon.view-count {
+            background-color: #fff3e0;
+            color: #f39c12;
+        }
+        .stat-icon.budget {
+            background-color: #fce4ec;
+            color: #e91e63;
+        }
+        .stat-info h3 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .stat-info p {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* 快捷操作区 */
+        .quick-actions {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            color: #3498db;
+            margin-right: 8px;
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .action-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .action-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #3498db;
+        }
+        .action-card i {
+            font-size: 32px;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        .action-card h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .action-card p {
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        /* 最近广告列表 */
+        .recent-ads {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+        }
+        .table-responsive {
+            overflow-x: auto;
+        }
+        .ads-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .ads-table th, .ads-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ads-table th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        .ads-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        .status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .status.active {
+            background-color: #e8f5e9;
+            color: #2ecc71;
+        }
+        .status.pending {
+            background-color: #fff3e0;
+            color: #f39c12;
+        }
+        .status.inactive {
+            background-color: #fce4ec;
+            color: #e91e63;
+        }
+        .operate-btn {
+            color: #3498db;
+            text-decoration: none;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+        .operate-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 60px;
+                padding: 20px 0;
+            }
+            .menu-title, .menu-link span {
+                display: none;
+            }
+            .menu-link {
+                justify-content: center;
+                padding: 15px 0;
+            }
+            .menu-link i {
+                margin-right: 0;
+                font-size: 18px;
+            }
+            .menu-link.active {
+                border-left: none;
+                background-color: #3498db;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px;
+            }
+            .logo span {
+                font-size: 16px;
+            }
+            .user-info span {
+                display: none;
+            }
+            .content {
+                padding: 15px;
+            }
+            .stats-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 576px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            .ads-table th, .ads-table td {
+                padding: 8px 10px;
+                font-size: 13px;
+            }
+            .operate-btn {
+                margin-right: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="logo">
+            <i class="fas fa-bullhorn"></i>
+            <span>广告商管理平台</span>
+        </div>
+        <div class="user-info">
+            <span id="username">广告商管理员</span>
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </button>
+        </div>
+    </header>
+
+    <!-- 主体内容区 -->
+    <div class="container">
+        <!-- 侧边栏菜单 -->
+        <aside class="sidebar">
+            <h3 class="menu-title">核心功能</h3>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="advertiser-homepage.html" class="menu-link active">
+                        <i class="fas fa-home"></i>
+                        <span>首页概览</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="advertiser-ad-list.html" class="menu-link">
+                        <i class="fas fa-list-alt"></i>
+                        <span>广告管理</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="advertiser-add-ad.html" class="menu-link">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>新增广告</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="advertiser-data.html" class="menu-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>数据统计</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="advertiser-budget.html" class="menu-link">
+                        <i class="fas fa-wallet"></i>
+                        <span>预算管理</span>
+                    </a>
+                </li>
+            </ul>
+
+            <h3 class="menu-title">系统设置</h3>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a href="advertiser-profile.html" class="menu-link">
+                        <i class="fas fa-user-cog"></i>
+                        <span>个人资料</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="advertiser-password.html" class="menu-link">
+                        <i class="fas fa-key"></i>
+                        <span>修改密码</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- 主要内容 -->
+        <main class="content">
+            <h2 class="page-title">欢迎回来，广告商管理员！</h2>
+
+            <!-- 数据概览卡片 -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon ad-count">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>当前运行广告数</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon view-count">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>28,543</h3>
+                        <p>今日广告曝光量</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-click"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>3,621</h3>
+                        <p>今日广告点击量</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon budget">
+                        <i class="fas fa-yen-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>15,800</h3>
+                        <p>剩余广告预算(元)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 快捷操作区 -->
+            <div class="quick-actions">
+                <h3 class="section-title">
+                    <i class="fas fa-rocket"></i> 快捷操作
+                </h3>
+                <div class="actions-grid">
+                    <div class="action-card" onclick="window.location.href='advertiser-add-ad.html'">
+                        <i class="fas fa-plus-circle"></i>
+                        <h4>新增广告</h4>
+                        <p>创建新的广告投放计划</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='advertiser-ad-list.html'">
+                        <i class="fas fa-edit"></i>
+                        <h4>编辑广告</h4>
+                        <p>修改现有广告内容或配置</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='advertiser-budget.html'">
+                        <i class="fas fa充值"></i>
+                        <h4>充值预算</h4>
+                        <p>为广告投放充值预算</p>
+                    </div>
+                    <div class="action-card" onclick="window.location.href='advertiser-data.html'">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>查看报表</h4>
+                        <p>查看广告效果数据报表</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最近广告列表 -->
+            <div class="recent-ads">
+                <h3 class="section-title">
+                    <i class="fas fa-history"></i> 最近广告动态
+                </h3>
+                <div class="table-responsive">
+                    <table class="ads-table">
+                        <thead>
+                            <tr>
+                                <th>广告名称</th>
+                                <th>投放位置</th>
+                                <th>曝光量</th>
+                                <th>点击量</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>夏季新品服装推广</td>
+                                <td>首页轮播图</td>
+                                <td>12,345</td>
+                                <td>1,234</td>
+                                <td><span class="status active">运行中</span></td>
+                                <td>
+                                    <a href="#" class="operate-btn">编辑</a>
+                                    <a href="#" class="operate-btn">暂停</a>
+                                    <a href="#" class="operate-btn">数据</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>电子产品促销活动</td>
+                                <td>电影详情页侧边栏</td>
+                                <td>8,765</td>
+                                <td>876</td>
+                                <td><span class="status active">运行中</span></td>
+                                <td>
+                                    <a href="#" class="operate-btn">编辑</a>
+                                    <a href="#" class="operate-btn">暂停</a>
+                                    <a href="#" class="operate-btn">数据</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>美食优惠券发放</td>
+                                <td>底部广告位</td>
+                                <td>5,432</td>
+                                <td>543</td>
+                                <td><span class="status pending">待审核</span></td>
+                                <td>
+                                    <a href="#" class="operate-btn">查看</a>
+                                    <a href="#" class="operate-btn">修改</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>旅游套餐限时折扣</td>
+                                <td>分类页顶部</td>
+                                <td>3,210</td>
+                                <td>321</td>
+                                <td><span class="status inactive">已暂停</span></td>
+                                <td>
+                                    <a href="#" class="operate-btn">编辑</a>
+                                    <a href="#" class="operate-btn">启动</a>
+                                    <a href="#" class="operate-btn">删除</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 页面加载时校验登录状态（必须有token才允许访问）
+        window.onload = function() {
+            const adminToken = localStorage.getItem('adminToken');
+            // 无token，强制跳回登录页
+            if (!adminToken) {
+                alert('请先通过管理员登录！');
+                window.location.href = '/login.html';
+                return;
+            }
+
+            // 可选：从token中解析用户名（如果需要显示当前登录用户）
+            // 这里简化处理，直接显示固定文本，实际可解析JWT获取username
+            try {
+                const tokenPayload = JSON.parse(atob(adminToken.split('.')[1]));
+                const username = tokenPayload.username || '广告商管理员';
+                document.getElementById('username').textContent = username;
+            } catch (e) {
+                console.log('解析token失败，使用默认用户名');
+            }
+        };
+
+        // 退出登录功能
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('确定要退出登录吗？')) {
+                // 清除本地存储的token
+                localStorage.removeItem('adminToken');
+                // 跳回登录页
+                window.location.href = '/login.html';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dali.movie.mapper.MoviesInfoMapper">
+
+    <select id="getMovieGenre" resultType="com.dali.movie.model.MoviesInfo">
+        SELECT
+            id, title, original_title AS originalTitle, director, screenwriter,
+            actor, genre, country, language, release_date AS releaseDate,
+            duration, description, poster_url AS posterUrl
+        FROM
+            movies
+        WHERE
+            genre LIKE CONCAT('%', #{genre}, '%')
+        ORDER BY
+            release_date DESC
+    </select>
+
+    <select id="getMovieReleaseDate" resultType="com.dali.movie.model.MoviesInfo">
+        SELECT
+            id, title, original_title AS originalTitle, director, screenwriter,
+            actor, genre, country, language, release_date AS releaseDate,
+            duration, description, poster_url AS posterUrl
+        FROM
+            movies
+        WHERE
+            YEAR(release_date) = #{year}  -- 按年份筛选
+        ORDER BY
+            release_date DESC
+    </select>
+</mapper>

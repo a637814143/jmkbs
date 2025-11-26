@@ -1,0 +1,158 @@
+/* 全局样式重置与基础设置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft Yahei", sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 容器样式 */
+.container {
+  width: 1000px;
+  margin: 30px auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+  width: 220px;
+  float: left;
+  background-color: #2c3e50;
+  color: #fff;
+  min-height: 500px;
+}
+
+.sidebar .nav {
+  list-style: none;
+}
+
+.sidebar .nav-item {
+  padding: 15px 20px;
+  border-bottom: 1px solid #34495e;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sidebar .nav-item:hover,
+.sidebar .nav-item.active {
+  background-color: #34495e;
+}
+
+.sidebar .nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* 主内容区样式 */
+.main {
+  margin-left: 220px;
+  padding: 30px;
+}
+
+.main h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+}
+
+/* 用户信息卡片样式 */
+.user-card {
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3498db;
+  margin-right: 20px;
+  float: left;
+}
+
+.user-info {
+  overflow: hidden;
+}
+
+.user-info h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.user-info .info-item {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.user-info .label {
+  display: inline-block;
+  width: 80px;
+  color: #666;
+}
+
+.user-info .value {
+  color: #333;
+  font-weight: 500;
+}
+
+/* 状态标签样式 */
+.status-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.status-tag.normal {
+  background-color: #2ecc71;
+  color: #fff;
+}
+
+.status-tag.disabled {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.status-tag.pending {
+  background-color: #f39c12;
+  color: #fff;
+}
+
+/* 响应式适配 */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    float: none;
+  }
+  .main {
+    margin-left: 0;
+  }
+  .user-avatar {
+    float: none;
+    margin-bottom: 15px;
+  }
+}

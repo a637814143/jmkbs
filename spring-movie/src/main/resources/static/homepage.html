@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影评家 - 发现好电影，分享真感受</title>
+    <!-- 引入Font Awesome图标库（用于导航、按钮等图标） -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <i class="fas fa-film"></i>
+                <span>影评家</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="active"><i class="fas fa-home"></i> 首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="notifications.html"><i class="fas fa-compass"></i> 通知</a>
+                </li>
+                <li class="nav-item">
+                    <a href="movie-category.html"><i class="fas fa-list"></i> 电影分类</a>
+                </li>
+                <li class="nav-item">
+                    <a href="hot-comments.html"><i class="fas fa-comment-alt"></i> 热门评论</a>
+                </li>
+                <li class="nav-item">
+                    <a href="peopleComment.html"><i class="fas fa-user"></i> 我的评论</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="搜索电影、评论...">
+                </div>
+                <a href="login.html" class="btn btn-outline">登录</a>
+                <a href="#" class="btn btn-primary">发布评论</a>
+                <!-- <img src="pic/logo.png" alt="">
+                <span class="blog-title">电影评论网站</span> -->
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 轮播图 -->
+    <div class="carousel">
+        <div class="carousel-slides">
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/1400/500?random=1" alt="轮播图1" class="carousel-img">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">星际穿越</h2>
+                    <p class="carousel-desc">跨越时空的爱与坚守，人类对宇宙的探索与敬畏，诺兰封神之作</p>
+                    <a href="#" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/1400/500?random=2" alt="轮播图2" class="carousel-img">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">奥本海默</h2>
+                    <p class="carousel-desc">原子弹之父的复杂人生，道德与科学的终极博弈，史诗级传记片</p>
+                    <a href="#" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/1400/500?random=3" alt="轮播图3" class="carousel-img">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">流浪地球2</h2>
+                    <p class="carousel-desc">中国科幻的里程碑，人类命运共同体的宏大叙事，硬核特效震撼全场</p>
+                    <a href="#" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-index="0"></div>
+            <div class="carousel-indicator" data-index="1"></div>
+            <div class="carousel-indicator" data-index="2"></div>
+        </div>
+
+        <button class="carousel-control carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-control carousel-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 分类筛选 -->
+<!--        <div class="section">-->
+<!--            <div class="categories-bar">-->
+<!--                <h3 class="categories-title">电影分类</h3>-->
+<!--                <div class="categories-list">-->
+<!--                    <div class="category-item active">全部</div>-->
+<!--                    <div class="category-item">科幻</div>-->
+<!--                    <div class="category-item">剧情</div>-->
+<!--                    <div class="category-item">悬疑</div>-->
+<!--                    <div class="category-item">动作</div>-->
+<!--                    <div class="category-item">喜剧</div>-->
+<!--                    <div class="category-item">爱情</div>-->
+<!--                    <div class="category-item">动画</div>-->
+<!--                    <div class="category-item">纪录片</div>-->
+<!--                    <div class="category-item">战争</div>-->
+<!--                    <div class="category-item">恐怖</div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!-- 热门电影 -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">热门电影</h2>
+                <a href="#" class="section-more">查看更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="movies-grid">
+                <!-- 电影卡片1 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=10" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">沙丘2</h3>
+                        <div class="movie-card-meta">
+                            <span>2024</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 9.2
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">科幻</span>
+                            <span class="movie-card-tag">冒险</span>
+                            <span class="movie-card-tag">史诗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片2 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=11" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">瞬息全宇宙</h3>
+                        <div class="movie-card-meta">
+                            <span>2022</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.1
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">科幻</span>
+                            <span class="movie-card-tag">喜剧</span>
+                            <span class="movie-card-tag">奇幻</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片3 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=12" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">健听女孩</h3>
+                        <div class="movie-card-meta">
+                            <span>2021</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.6
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">剧情</span>
+                            <span class="movie-card-tag">音乐</span>
+                            <span class="movie-card-tag">治愈</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片4 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=13" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">蜘蛛侠：纵横宇宙</h3>
+                        <div class="movie-card-meta">
+                            <span>2023</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.5
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">动画</span>
+                            <span class="movie-card-tag">超级英雄</span>
+                            <span class="movie-card-tag">冒险</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片5 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=14" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">寄生虫</h3>
+                        <div class="movie-card-meta">
+                            <span>2019</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.8
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">剧情</span>
+                            <span class="movie-card-tag">悬疑</span>
+                            <span class="movie-card-tag">黑色幽默</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片6 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=15" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">疯狂的麦克斯4</h3>
+                        <div class="movie-card-meta">
+                            <span>2015</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.7
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">动作</span>
+                            <span class="movie-card-tag">冒险</span>
+                            <span class="movie-card-tag">科幻</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最新评论 -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">最新评论</h2>
+                <a href="#" class="section-more">查看更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="comments-list">
+                <!-- 评论卡片1 -->
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="https://picsum.photos/40/40?random=20" alt="用户头像" class="comment-avatar">
+                        <div class="comment-user-info">
+                            <div class="comment-user-name">科幻迷小张</div>
+                            <div class="comment-time">2025-10-25 16:30</div>
+                        </div>
+                    </div>
+                    <div class="comment-movie">《沙丘2》</div>
+                    <div class="comment-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="comment-content">
+                        视觉盛宴！宏大的世界观和史诗级的战争场面让人震撼，配乐更是点睛之笔。期待下一部的剧情发展，沙丘宇宙太有魅力了。
+                    </div>
+                    <a href="#" class="section-more" style="font-size: 14px;">查看完整评论</a>
+                </div>
+
+                <!-- 评论卡片2 -->
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="https://picsum.photos/40/40?random=21" alt="用户头像" class="comment-avatar">
+                        <div class="comment-user-info">
+                            <div class="comment-user-name">电影爱好者小李</div>
+                            <div class="comment-time">2025-10-24 09:15</div>
+                        </div>
+                    </div>
+                    <div class="comment-movie">《奥本海默》</div>
+                    <div class="comment-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="comment-content">
+                        诺兰用非线性叙事完美展现了“原子弹之父”的复杂人生，道德与科学的博弈令人深思。电影的节奏和配乐都恰到好处，是近几年最好的传记片之一。
+                    </div>
+                    <a href="#" class="section-more" style="font-size: 14px;">查看完整评论</a>
+                </div>
+
+                <!-- 评论卡片3 -->
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="https://picsum.photos/40/40?random=22" alt="用户头像" class="comment-avatar">
+                        <div class="comment-user-info">
+                            <div class="comment-user-name">文艺青年小赵</div>
+                            <div class="comment-time">2025-10-23 20:00</div>
+                        </div>
+                    </div>
+                    <div class="comment-movie">《健听女孩》</div>
+                    <div class="comment-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="comment-content">
+                        温馨又治愈的故事，聋哑家庭的设定很新颖。女主的成长线和音乐梦想的追求都很动人，结局的处理也很温暖。最打动我的是家人之间无声的爱。
+                    </div>
+                    <a href="#" class="section-more" style="font-size: 14px;">查看完整评论</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+<!--    <footer class="footer">-->
+<!--        <div class="container">-->
+<!--            <div class="footer-container">-->
+<!--                <div class="footer-col">-->
+<!--                    <h3>影评家</h3>-->
+<!--                    <p style="margin: 20px 0; color: #aaa; font-size: 14px;">-->
+<!--                        发现好电影，分享真感受。打造最真实、最有温度的电影评论社区。-->
+<!--                    </p>-->
+<!--                    <div class="footer-social">-->
+<!--                        <a href="#"><i class="fab fa-weibo"></i></a>-->
+<!--                        <a href="#"><i class="fab fa-wechat"></i></a>-->
+<!--                        <a href="#"><i class="fab fa-instagram"></i></a>-->
+<!--                        <a href="#"><i class="fab fa-twitter"></i></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="footer-col">-->
+<!--                    <h3>快速链接</h3>-->
+<!--                    <ul class="footer-links">-->
+<!--                        <li><a href="#">首页</a></li>-->
+<!--                        <li><a href="#">电影分类</a></li>-->
+<!--                        <li><a href="#">热门评论</a></li>-->
+<!--                        <li><a href="#">最新上映</a></li>-->
+<!--                        <li><a href="#">排行榜</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+<!--                <div class="footer-col">-->
+<!--                    <h3>关于我们</h3>-->
+<!--                    <ul class="footer-links">-->
+<!--                        <li><a href="#">平台介绍</a></li>-->
+<!--                        <li><a href="#">联系我们</a></li>-->
+<!--                        <li><a href="#">用户协议</a></li>-->
+<!--                        <li><a href="#">隐私政策</a></li>-->
+<!--                        <li><a href="#">帮助中心</a></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
+<!--                <div class="footer-col">-->
+<!--                    <h3>订阅更新</h3>-->
+<!--                    <p style="margin: 10px 0; color: #aaa; font-size: 14px;">-->
+<!--                        订阅我们的 newsletter，获取最新电影资讯和评论推荐-->
+<!--                    </p>-->
+<!--                    <div style="display: flex; gap: 10px;">-->
+<!--                        <input type="email" placeholder="你的邮箱地址" style="flex: 1; padding: 10px; border-radius: 4px; border: none; font-size: 14px;">-->
+<!--                        <button class="btn btn-primary">订阅</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="footer-bottom">-->
+<!--                <p>© 2025 影评家 All Rights Reserved. 京ICP备12345678号</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </footer>-->
+
+    <script src="js/jquery.min.js"></script>
+    <script>
+// 获取前端搜索元素
+const searchInput = document.querySelector('.search-input');
+const searchIcon = document.querySelector('.fas.fa-search');
+
+// 定义Ajax搜索函数
+function searchMovie() {
+    const title = searchInput.value.trim();
+    if (!title) return;
+
+    // 原生Ajax请求
+    const xhr = new XMLHttpRequest();
+    // 拼接后端接口地址，注意参数名与后端保持一致（这里是title）
+    const url = `http://127.0.0.1:8080/movie/getMovieDetail?title=${encodeURIComponent(title)}`;
+    xhr.open('GET', url, true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 假设后端返回JSON格式数据，可根据实际情况解析处理
+            const movieDetail = JSON.parse(xhr.responseText);
+            console.log('电影详情：', movieDetail);
+            // 这里可添加渲染电影详情的逻辑，如展示到页面
+            location.href = "movie-database.html";
+        } else if (xhr.readyState === 4) {
+            console.error('请求失败，状态码：', xhr.status);
+            alert('查询电影详情失败，请重试！');
+        }
+    };
+
+    xhr.send();
+}
+
+// 绑定搜索图标点击事件
+searchIcon.addEventListener('click', searchMovie);
+
+// 绑定回车键事件
+searchInput.addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        searchMovie();
+    }
+});
+
+        
+//         $(function() {
+//         // 给登录按钮绑定点击事件
+//         $('#loginBtn').on('click', function(e) {
+//         // 🔴 关键步骤1：阻止 a 标签的默认跳转行为（默认会跳转到 href="#"，即当前页顶部）
+//         e.preventDefault();
+
+//         // 🔴 关键步骤2：执行 AJAX 请求（核心业务逻辑，根据需求修改）
+//         // 示例：跳转前验证用户是否已登录（实际场景可替换为你的接口）
+//         $.ajax({
+//             url: '/api/check-login-status', // 后端接口地址（判断用户是否已登录）
+//             type: 'GET', // 请求方式（GET/POST，根据接口要求）
+//             dataType: 'json', // 期望后端返回 JSON 格式数据
+//             timeout: 5000, // 超时时间（5秒没响应则失败）
+            
+//             // AJAX 请求成功（后端返回数据）
+//             success: function(response) {
+//                 // 假设后端返回 { "isLogin": false }（未登录）、{ "isLogin": true }（已登录）
+//                 if (response.isLogin) {
+//                     // 已登录：提示并跳转到个人中心（或其他页面）
+//                     alert('您已登录，跳转到个人中心！');
+//                     window.location.href = '/user-center.html'; // 已登录后的跳转页
+//                 } else {
+//                     // 未登录：跳转到 login.html（核心需求）
+//                     window.location.href = 'login.html'; // 手动跳转至登录页
+//                 }
+//             },
+
+//             // AJAX 请求失败（网络错误、接口报错等）
+//             error: function(xhr, status, error) {
+//                 // 失败处理：提示用户，仍跳转到 login.html（避免因接口问题阻塞跳转）
+//                 alert('网络异常，将为您跳转到登录页...');
+//                 window.location.href = 'login.html';
+//             }
+//         });
+//     });
+// });
+    </script>
+    <script src="/js/homepage.js"></script>
+</body>
+</html>

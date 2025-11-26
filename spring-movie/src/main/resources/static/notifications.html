@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的通知 - 个人中心</title>
+  <!-- 引入Font Awesome图标库（用于图标显示） -->
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- 引入CSS样式文件 -->
+  <link rel="stylesheet" href="/css/notifications.css">
+</head>
+<body>
+  <div class="notification-container">
+    <!-- 页面标题 -->
+    <header class="notification-header">
+      <h1>我的通知</h1>
+      <div class="header-actions">
+        <button id="markAllRead" class="btn btn-outline">
+          <i class="fas fa-check-circle"></i> 全部已读
+        </button>
+        <button id="deleteAll" class="btn btn-danger">
+          <i class="fas fa-trash"></i> 清空通知
+        </button>
+      </div>
+    </header>
+
+    <!-- 通知筛选栏 -->
+    <div class="notification-filter">
+      <button class="filter-btn active" data-type="all">全部通知</button>
+      <button class="filter-btn" data-type="unread">未读通知</button>
+      <button class="filter-btn" data-type="system">系统通知</button>
+      <button class="filter-btn" data-type="comment">评论通知</button>
+      <button class="filter-btn" data-type="like">点赞通知</button>
+      <button class="filter-btn" data-type="message">私信通知</button>
+    </div>
+
+    <!-- 通知列表 -->
+    <div class="notification-list" id="notificationList">
+      <!-- 通知项将通过JavaScript动态渲染 -->
+    </div>
+
+    <!-- 空状态提示（无通知时显示） -->
+    <div class="empty-notification" id="emptyNotification" style="display: none;">
+      <i class="fas fa-bell-slash"></i>
+      <p>暂无通知</p>
+      <button class="btn btn-primary" id="refreshBtn">刷新试试</button>
+    </div>
+  </div>
+
+  <!-- 引入JavaScript交互文件 -->
+  <script src="/js/notifications.js"></script>
+</body>
+</html>

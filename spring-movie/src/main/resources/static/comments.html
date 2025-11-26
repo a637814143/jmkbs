@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影评论区</title>
+    <link rel="stylesheet" href="/css/comments.css">
+</head>
+<body>
+    <div class="container">
+        <div class="movie-header">
+            <img src="https://picsum.photos/200/300?random=1" alt="电影海报" class="movie-poster">
+            <div>
+                <h1 class="movie-title">星际穿越</h1>
+                <p class="movie-info">导演: 克里斯托弗·诺兰 | 主演: 马修·麦康纳, 安妮·海瑟薇 | 评分: 9.4</p>
+                <p class="movie-info">类型: 科幻, 冒险, 剧情 | 上映时间: 2014-11-07</p>
+            </div>
+        </div>
+
+        <div class="comment-section">
+            <h2 class="section-title">电影评论</h2>
+            <div class="comment-list">
+                <div class="comment-item">
+                    <div class="comment-user">
+                        <div class="user-avatar">张</div>
+                        <div class="user-info">
+                            <div class="user-name">科幻迷小张</div>
+                            <div class="comment-time">2025-10-15 14:30</div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        这部电影的科幻设定太震撼了！黑洞、虫洞的视觉效果堪称一绝，剧情也充满了对人性和爱的思考，二刷依然感动到落泪。
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-user">
+                        <div class="user-avatar">李</div>
+                        <div class="user-info">
+                            <div class="user-name">电影爱好者小李</div>
+                            <div class="comment-time">2025-10-10 09:15</div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        诺兰的叙事手法总是这么独特，时间的维度被玩出了花。马修·麦康纳的演技也撑起了整个故事，最后和女儿的对话看一次哭一次。
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-user">
+                        <div class="user-avatar">王</div>
+                        <div class="user-info">
+                            <div class="user-name">太空探索者小王</div>
+                            <div class="comment-time">2025-10-05 16:45</div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        作为一个天文爱好者，电影里的科学细节处理得非常严谨，让我对宇宙的浩瀚更加敬畏。配乐也很加分，每次响起都让人起鸡皮疙瘩。
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="comment-user">
+                        <div class="user-avatar">赵</div>
+                        <div class="user-info">
+                            <div class="user-name">文艺青年小赵</div>
+                            <div class="comment-time">2025-09-30 20:00</div>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        不止是科幻片，更是一部关于亲情和牺牲的史诗。跨越时空的爱太好哭了，人类的渺小和伟大在这部电影里体现得淋漓尽致。
+                    </div>
+                </div>
+            </div>
+
+            <div class="comment-form">
+                <h3 class="section-title" style="font-size: 18px; border-bottom: none; margin-bottom: 15px;">发表你的评论</h3>
+                <div class="form-group">
+                    <label for="username">昵称</label>
+                    <input type="text" id="username" placeholder="请输入你的昵称">
+                </div>
+                <div class="form-group">
+                    <label for="comment">评论内容</label>
+                    <textarea id="comment" placeholder="分享你对这部电影的看法..."></textarea>
+                </div>
+                <button class="btn">提交评论</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>广告商注册 - 营销管理平台</title>
+    <!-- 引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .register-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .register-header {
+            background: linear-gradient(90deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .register-header h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-header h2 i {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+
+        .register-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .register-form {
+            padding: 30px 35px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4361ee;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .form-group input:focus + i {
+            color: #4361ee;
+        }
+
+        .form-tips {
+            margin-top: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .agreement {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .agreement input {
+            margin-right: 8px;
+            accent-color: #4361ee;
+        }
+
+        .agreement label {
+            color: #666;
+            cursor: pointer;
+        }
+
+        .agreement a {
+            color: #4361ee;
+            text-decoration: none;
+        }
+
+        .agreement a:hover {
+            text-decoration: underline;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #4361ee 0%, #3a0ca3 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-btn i {
+            margin-right: 10px;
+        }
+
+        .register-btn:hover {
+            background: linear-gradient(90deg, #3a56d4 0%, #320b8e 100%);
+            transform: translateY(-2px);
+        }
+
+        .register-btn:active {
+            transform: translateY(0);
+        }
+
+        .register-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .register-footer a {
+            color: #4361ee;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .register-footer a:hover {
+            color: #3a0ca3;
+            text-decoration: underline;
+        }
+
+        /* 错误提示样式 */
+        .error-message {
+            color: #e53e3e;
+            font-size: 12px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        input.error {
+            border-color: #e53e3e;
+        }
+
+        input.error + i {
+            color: #e53e3e;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .register-container {
+                max-width: 100%;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .register-header {
+                padding: 20px;
+            }
+
+            .register-header h2 {
+                font-size: 22px;
+            }
+
+            .register-form {
+                padding: 25px 20px;
+            }
+
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .register-btn {
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <!-- 注册头部 -->
+        <div class="register-header">
+            <h2><i class="fa fa-user-plus"></i> 广告商注册</h2>
+            <p>快速注册，开启高效营销之旅</p>
+        </div>
+
+        <!-- 注册表单（已删除确认密码字段） -->
+        <form class="register-form" id="advertiserRegisterForm">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="请设置用户名（4-20位字符）" required>
+                    <i class="fa fa-user"></i>
+                </div>
+                <div class="form-tips">支持字母、数字、下划线，4-20位</div>
+                <div class="error-message" id="usernameError">用户名格式错误</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">密码</label>
+                <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="请设置密码（6-20位）" required>
+                    <i class="fa fa-lock"></i>
+                </div>
+                <div class="form-tips">包含字母和数字，6-20位，建议使用复杂密码</div>
+                <div class="error-message" id="passwordError">密码格式错误</div>
+            </div>
+
+            <div class="agreement">
+                <input type="checkbox" id="agreement" name="agreement" required>
+                <label for="agreement">我已阅读并同意<a href="#">《用户服务协议》</a>和<a href="#">《隐私政策》</a></label>
+            </div>
+
+            <button type="button" class="register-btn" id="registerBtn">
+                <i class="fa fa-check"></i> 立即注册
+            </button>
+
+            <div class="register-footer">
+                已有账号？<a href="advertiser-login.html">立即登录</a> <!-- 关联登录页面 -->
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // 表单验证逻辑（已移除确认密码相关验证）
+        const registerBtn = document.getElementById('registerBtn');
+        const username = document.getElementById('username');
+        const password = document.getElementById('password');
+        const agreement = document.getElementById('agreement');
+
+        // 用户名验证（4-20位字母、数字、下划线）
+        function validateUsername() {
+            const reg = /^[a-zA-Z0-9_]{4,20}$/;
+            const errorEl = document.getElementById('usernameError');
+            if (!reg.test(username.value.trim())) {
+                username.classList.add('error');
+                errorEl.style.display = 'block';
+                return false;
+            }
+            username.classList.remove('error');
+            errorEl.style.display = 'none';
+            return true;
+        }
+
+        // 密码验证（6-20位，包含字母和数字）
+        function validatePassword() {
+            const reg = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{6,20}$/;
+            const errorEl = document.getElementById('passwordError');
+            if (!reg.test(password.value.trim())) {
+                password.classList.add('error');
+                errorEl.style.display = 'block';
+                return false;
+            }
+            password.classList.remove('error');
+            errorEl.style.display = 'none';
+            return true;
+        }
+
+        // 输入框实时验证
+        username.addEventListener('input', validateUsername);
+        password.addEventListener('input', validatePassword);
+
+        // 注册按钮点击事件
+        registerBtn.addEventListener('click', function() {
+            // 触发所有验证
+            const isUsernameValid = validateUsername();
+            const isPasswordValid = validatePassword();
+            const isAgreementChecked = agreement.checked;
+
+            // 检查协议是否勾选
+            if (!isAgreementChecked) {
+                alert('请阅读并同意用户服务协议和隐私政策');
+                return;
+            }
+
+            // 所有验证通过
+            if (isUsernameValid && isPasswordValid && isAgreementChecked) {
+                const registerData = {
+                    username: username.value.trim(),
+                    password: password.value.trim()
+                };
+
+                // 此处可添加Axios请求后端注册接口的逻辑
+                console.log('注册请求参数：', registerData);
+
+                // 模拟注册成功
+                alert('注册成功！请前往登录页面登录');
+                // 跳转到登录页面（根据实际登录页面路径调整）
+                window.location.href = 'advertiser-login.html';
+            }
+        });
+    </script>
+</body>
+</html>

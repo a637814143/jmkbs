@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>影评家 - 发现好电影，分享真感受</title>
+    <!-- 引入Font Awesome图标库（用于导航、按钮等图标） -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", "Inter", sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 通用容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 28px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-item a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-item a:hover,
+        .nav-item a.active {
+            color: #ff6b6b;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 8px 16px 8px 38px;
+            border-radius: 20px;
+            border: none;
+            background-color: #333;
+            color: #fff;
+            font-size: 14px;
+            width: 200px;
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            width: 250px;
+            background-color: #444;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #ff6b6b;
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff4949;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #e0e0e0;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-outline:hover {
+            color: #ff6b6b;
+            border-color: #ff6b6b;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* 轮播图 */
+        .carousel {
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .carousel-slides {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-slide {
+            flex: 1 0 100%;
+            position: relative;
+        }
+
+        .carousel-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .carousel-content {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            text-align: center;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .carousel-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-desc {
+            font-size: 18px;
+            margin-bottom: 30px;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+            line-height: 1.8;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background-color: #fff;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+            font-size: 18px;
+        }
+
+        .carousel-control:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .carousel-prev {
+            left: 20px;
+        }
+
+        .carousel-next {
+            right: 20px;
+        }
+
+        /* section通用样式 */
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2d3748;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #ff6b6b;
+            border-radius: 2px;
+        }
+
+        .section-more {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-more:hover {
+            text-decoration: underline;
+        }
+
+        /* 热门电影列表 */
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .movie-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .movie-card-img {
+            width: 100%;
+            height: 330px;
+            object-fit: cover;
+        }
+
+        .movie-card-content {
+            padding: 18px;
+        }
+
+        .movie-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .movie-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #718096;
+        }
+
+        .movie-card-rating {
+            color: #ffc107;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .movie-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .movie-card-tag {
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background-color: #f5f5f5;
+            color: #718096;
+        }
+
+        /* 最新评论 */
+        .comments-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .comment-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .comment-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .comment-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            object-fit: cover;
+        }
+
+        .comment-user-info {
+            flex: 1;
+        }
+
+        .comment-user-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 2px;
+        }
+
+        .comment-time {
+            font-size: 13px;
+            color: #718096;
+        }
+
+        .comment-movie {
+            font-size: 14px;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .comment-content {
+            font-size: 15px;
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .comment-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        /* 分类筛选栏 */
+        .categories-bar {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .categories-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+
+        .categories-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .category-item {
+            padding: 8px 18px;
+            border-radius: 20px;
+            background-color: #f5f5f5;
+            color: #4a5568;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover,
+        .category-item.active {
+            background-color: #ff6b6b;
+            color: #fff;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: #1a1a1a;
+            color: #aaa;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .footer-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: #ff6b6b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            font-size: 14px;
+            color: #777;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1200px) {
+            .carousel-title {
+                font-size: 36px;
+            }
+
+            .carousel-desc {
+                font-size: 16px;
+            }
+
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .movie-card-img {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                background-color: #1a1a1a;
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .carousel {
+                height: 400px;
+            }
+
+            .carousel-title {
+                font-size: 30px;
+            }
+
+            .carousel-desc {
+                font-size: 15px;
+                margin-bottom: 20px;
+            }
+
+            .comments-list {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .carousel {
+                height: 300px;
+            }
+
+            .carousel-title {
+                font-size: 24px;
+            }
+
+            .carousel-desc {
+                font-size: 14px;
+                -webkit-line-clamp: 2;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 20px;
+            }
+
+            .movie-card-img {
+                height: 240px;
+            }
+
+            .movie-card-title {
+                font-size: 16px;
+            }
+
+            .comments-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .search-input {
+                width: 150px;
+            }
+
+            .search-input:focus {
+                width: 180px;
+            }
+
+            .nav-actions {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .carousel {
+                height: 250px;
+            }
+
+            .carousel-title {
+                font-size: 20px;
+            }
+
+            .carousel-desc {
+                display: none;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .categories-list {
+                gap: 8px;
+            }
+
+            .category-item {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .footer-container {
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="logo">
+                <i class="fas fa-film"></i>
+                <span>影评家</span>
+            </a>
+
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="active"><i class="fas fa-home"></i> 首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="notifications.html"><i class="fas fa-compass"></i> 通知</a>
+                </li>
+                <li class="nav-item">
+                    <a href="movie-category.html"><i class="fas fa-list"></i> 电影分类</a>
+                </li>
+                <li class="nav-item">
+                    <a href="hot-comments.html"><i class="fas fa-comment-alt"></i> 热门评论</a>
+                </li>
+                <li class="nav-item">
+                    <a href="peopleComment.html"><i class="fas fa-user"></i> 我的评论</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="搜索电影、评论...">
+                </div>
+                <a href="login.html" class="btn btn-outline">登录</a>
+                <a href="#" class="btn btn-primary">发布评论</a>
+                <!-- <img src="pic/logo.png" alt="">
+                <span class="blog-title">电影评论网站</span> -->
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 轮播图 -->
+    <div class="carousel">
+        <div class="carousel-slides">
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/1400/500?random=1" alt="轮播图1" class="carousel-img">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">星际穿越</h2>
+                    <p class="carousel-desc">跨越时空的爱与坚守，人类对宇宙的探索与敬畏，诺兰封神之作</p>
+                    <a href="#" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/1400/500?random=2" alt="轮播图2" class="carousel-img">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">奥本海默</h2>
+                    <p class="carousel-desc">原子弹之父的复杂人生，道德与科学的终极博弈，史诗级传记片</p>
+                    <a href="#" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+            <div class="carousel-slide">
+                <img src="https://picsum.photos/1400/500?random=3" alt="轮播图3" class="carousel-img">
+                <div class="carousel-content">
+                    <h2 class="carousel-title">流浪地球2</h2>
+                    <p class="carousel-desc">中国科幻的里程碑，人类命运共同体的宏大叙事，硬核特效震撼全场</p>
+                    <a href="#" class="btn btn-primary">查看详情</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-indicators">
+            <div class="carousel-indicator active" data-index="0"></div>
+            <div class="carousel-indicator" data-index="1"></div>
+            <div class="carousel-indicator" data-index="2"></div>
+        </div>
+
+        <button class="carousel-control carousel-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-control carousel-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 分类筛选 -->
+        <div class="section">
+            <div class="categories-bar">
+                <h3 class="categories-title">电影分类</h3>
+                <div class="categories-list">
+                    <div class="category-item active">全部</div>
+                    <div class="category-item">科幻</div>
+                    <div class="category-item">剧情</div>
+                    <div class="category-item">悬疑</div>
+                    <div class="category-item">动作</div>
+                    <div class="category-item">喜剧</div>
+                    <div class="category-item">爱情</div>
+                    <div class="category-item">动画</div>
+                    <div class="category-item">纪录片</div>
+                    <div class="category-item">战争</div>
+                    <div class="category-item">恐怖</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 热门电影 -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">热门电影</h2>
+                <a href="#" class="section-more">查看更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="movies-grid">
+                <!-- 电影卡片1 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=10" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">沙丘2</h3>
+                        <div class="movie-card-meta">
+                            <span>2024</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 9.2
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">科幻</span>
+                            <span class="movie-card-tag">冒险</span>
+                            <span class="movie-card-tag">史诗</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片2 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=11" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">瞬息全宇宙</h3>
+                        <div class="movie-card-meta">
+                            <span>2022</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.1
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">科幻</span>
+                            <span class="movie-card-tag">喜剧</span>
+                            <span class="movie-card-tag">奇幻</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片3 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=12" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">健听女孩</h3>
+                        <div class="movie-card-meta">
+                            <span>2021</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.6
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">剧情</span>
+                            <span class="movie-card-tag">音乐</span>
+                            <span class="movie-card-tag">治愈</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片4 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=13" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">蜘蛛侠：纵横宇宙</h3>
+                        <div class="movie-card-meta">
+                            <span>2023</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.5
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">动画</span>
+                            <span class="movie-card-tag">超级英雄</span>
+                            <span class="movie-card-tag">冒险</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片5 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=14" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">寄生虫</h3>
+                        <div class="movie-card-meta">
+                            <span>2019</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.8
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">剧情</span>
+                            <span class="movie-card-tag">悬疑</span>
+                            <span class="movie-card-tag">黑色幽默</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 电影卡片6 -->
+                <div class="movie-card">
+                    <img src="https://picsum.photos/220/330?random=15" alt="电影海报" class="movie-card-img">
+                    <div class="movie-card-content">
+                        <h3 class="movie-card-title">疯狂的麦克斯4</h3>
+                        <div class="movie-card-meta">
+                            <span>2015</span>
+                            <div class="movie-card-rating">
+                                <i class="fas fa-star"></i> 8.7
+                            </div>
+                        </div>
+                        <div class="movie-card-tags">
+                            <span class="movie-card-tag">动作</span>
+                            <span class="movie-card-tag">冒险</span>
+                            <span class="movie-card-tag">科幻</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 最新评论 -->
+        <div class="section">
+            <div class="section-header">
+                <h2 class="section-title">最新评论</h2>
+                <a href="#" class="section-more">查看更多 <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="comments-list">
+                <!-- 评论卡片1 -->
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="https://picsum.photos/40/40?random=20" alt="用户头像" class="comment-avatar">
+                        <div class="comment-user-info">
+                            <div class="comment-user-name">科幻迷小张</div>
+                            <div class="comment-time">2025-10-25 16:30</div>
+                        </div>
+                    </div>
+                    <div class="comment-movie">《沙丘2》</div>
+                    <div class="comment-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="comment-content">
+                        视觉盛宴！宏大的世界观和史诗级的战争场面让人震撼，配乐更是点睛之笔。期待下一部的剧情发展，沙丘宇宙太有魅力了。
+                    </div>
+                    <a href="#" class="section-more" style="font-size: 14px;">查看完整评论</a>
+                </div>
+
+                <!-- 评论卡片2 -->
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="https://picsum.photos/40/40?random=21" alt="用户头像" class="comment-avatar">
+                        <div class="comment-user-info">
+                            <div class="comment-user-name">电影爱好者小李</div>
+                            <div class="comment-time">2025-10-24 09:15</div>
+                        </div>
+                    </div>
+                    <div class="comment-movie">《奥本海默》</div>
+                    <div class="comment-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="comment-content">
+                        诺兰用非线性叙事完美展现了“原子弹之父”的复杂人生，道德与科学的博弈令人深思。电影的节奏和配乐都恰到好处，是近几年最好的传记片之一。
+                    </div>
+                    <a href="#" class="section-more" style="font-size: 14px;">查看完整评论</a>
+                </div>
+
+                <!-- 评论卡片3 -->
+                <div class="comment-card">
+                    <div class="comment-user">
+                        <img src="https://picsum.photos/40/40?random=22" alt="用户头像" class="comment-avatar">
+                        <div class="comment-user-info">
+                            <div class="comment-user-name">文艺青年小赵</div>
+                            <div class="comment-time">2025-10-23 20:00</div>
+                        </div>
+                    </div>
+                    <div class="comment-movie">《健听女孩》</div>
+                    <div class="comment-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="comment-content">
+                        温馨又治愈的故事，聋哑家庭的设定很新颖。女主的成长线和音乐梦想的追求都很动人，结局的处理也很温暖。最打动我的是家人之间无声的爱。
+                    </div>
+                    <a href="#" class="section-more" style="font-size: 14px;">查看完整评论</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h3>影评家</h3>
+                    <p style="margin: 20px 0; color: #aaa; font-size: 14px;">
+                        发现好电影，分享真感受。打造最真实、最有温度的电影评论社区。
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-wechat"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">电影分类</a></li>
+                        <li><a href="#">热门评论</a></li>
+                        <li><a href="#">最新上映</a></li>
+                        <li><a href="#">排行榜</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>关于我们</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">平台介绍</a></li>
+                        <li><a href="#">联系我们</a></li>
+                        <li><a href="#">用户协议</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>订阅更新</h3>
+                    <p style="margin: 10px 0; color: #aaa; font-size: 14px;">
+                        订阅我们的 newsletter，获取最新电影资讯和评论推荐
+                    </p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="email" placeholder="你的邮箱地址" style="flex: 1; padding: 10px; border-radius: 4px; border: none; font-size: 14px;">
+                        <button class="btn btn-primary">订阅</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 影评家 All Rights Reserved. 京ICP备12345678号</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/jquery.min.js"></script>
+    <script>
+        // 移动端菜单切换
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('.nav-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+
+        // 轮播图功能
+        const carouselSlides = document.querySelector('.carousel-slides');
+        const carouselIndicators = document.querySelectorAll('.carousel-indicator');
+        const carouselPrev = document.querySelector('.carousel-prev');
+        const carouselNext = document.querySelector('.carousel-next');
+        let currentSlide = 0;
+        const totalSlides = carouselIndicators.length;
+
+        // 切换轮播图
+        function goToSlide(index) {
+            currentSlide = index;
+            carouselSlides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            // 更新指示器
+            carouselIndicators.forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        // 指示器点击事件
+        carouselIndicators.forEach((indicator, i) => {
+            indicator.addEventListener('click', () => {
+                goToSlide(i);
+            });
+        });
+
+        // 上一张/下一张
+        carouselPrev.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+        });
+
+        carouselNext.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        });
+
+        // 自动轮播
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }, 5000);
+
+        // 分类标签点击事件
+        const categoryItems = document.querySelectorAll('.category-item');
+        categoryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                categoryItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
+                // 这里可添加分类筛选逻辑
+            });
+        });
+        
+
+// 获取前端搜索元素
+const searchInput = document.querySelector('.search-input');
+const searchIcon = document.querySelector('.fas.fa-search');
+
+// 定义Ajax搜索函数
+function searchMovie() {
+    const title = searchInput.value.trim();
+    if (!title) return;
+
+    // 原生Ajax请求
+    const xhr = new XMLHttpRequest();
+    // 拼接后端接口地址，注意参数名与后端保持一致（这里是title）
+    const url = `http://127.0.0.1:8080/movie/getMovieDetail?title=${encodeURIComponent(title)}`;
+    xhr.open('GET', url, true);
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // 假设后端返回JSON格式数据，可根据实际情况解析处理
+            const movieDetail = JSON.parse(xhr.responseText);
+            console.log('电影详情：', movieDetail);
+            // 这里可添加渲染电影详情的逻辑，如展示到页面
+            location.href = "movie-database.html";
+        } else if (xhr.readyState === 4) {
+            console.error('请求失败，状态码：', xhr.status);
+            alert('查询电影详情失败，请重试！');
+        }
+    };
+
+    xhr.send();
+}
+
+// 绑定搜索图标点击事件
+searchIcon.addEventListener('click', searchMovie);
+
+// 绑定回车键事件
+searchInput.addEventListener('keyup', function(e) {
+    if (e.key === 'Enter') {
+        searchMovie();
+    }
+});
+
+        
+//         $(function() {
+//         // 给登录按钮绑定点击事件
+//         $('#loginBtn').on('click', function(e) {
+//         // 🔴 关键步骤1：阻止 a 标签的默认跳转行为（默认会跳转到 href="#"，即当前页顶部）
+//         e.preventDefault();
+
+//         // 🔴 关键步骤2：执行 AJAX 请求（核心业务逻辑，根据需求修改）
+//         // 示例：跳转前验证用户是否已登录（实际场景可替换为你的接口）
+//         $.ajax({
+//             url: '/api/check-login-status', // 后端接口地址（判断用户是否已登录）
+//             type: 'GET', // 请求方式（GET/POST，根据接口要求）
+//             dataType: 'json', // 期望后端返回 JSON 格式数据
+//             timeout: 5000, // 超时时间（5秒没响应则失败）
+            
+//             // AJAX 请求成功（后端返回数据）
+//             success: function(response) {
+//                 // 假设后端返回 { "isLogin": false }（未登录）、{ "isLogin": true }（已登录）
+//                 if (response.isLogin) {
+//                     // 已登录：提示并跳转到个人中心（或其他页面）
+//                     alert('您已登录，跳转到个人中心！');
+//                     window.location.href = '/user-center.html'; // 已登录后的跳转页
+//                 } else {
+//                     // 未登录：跳转到 login.html（核心需求）
+//                     window.location.href = 'login.html'; // 手动跳转至登录页
+//                 }
+//             },
+
+//             // AJAX 请求失败（网络错误、接口报错等）
+//             error: function(xhr, status, error) {
+//                 // 失败处理：提示用户，仍跳转到 login.html（避免因接口问题阻塞跳转）
+//                 alert('网络异常，将为您跳转到登录页...');
+//                 window.location.href = 'login.html';
+//             }
+//         });
+//     });
+// });
+    </script>
+</body>

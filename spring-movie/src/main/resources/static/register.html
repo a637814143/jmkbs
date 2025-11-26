@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>博客注册页</title>
+
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/register.css">
+</head>
+
+<body>
+  <div class="register-container">
+    <h2>注册</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <label for="username">用户名 <span class="required"></span></label>
+        <input type="text" id="username" name="username" placeholder="请输入用户名" required>
+        <span class="error" id="usernameError">用户名不能为空</span>
+      </div>
+      <div class="form-group">
+        <label for="password">密码 <span class="required"></span></label>
+        <input type="password" id="password" name="password" placeholder="请输入密码" required>
+        <span class="error" id="passwordError">密码不能为空</span>
+      </div>
+      <button type="button" class="btn-register" onclick="register()">注册</button>
+    </form>
+  </div>
+ <script src="js/jquery.min.js"></script>
+  <script>
+    function register() {
+      $.ajax({
+        type: "post",
+        url: "/user/register",
+        data: $('#registerForm').serialize(),
+        success: function (result) {
+          if (result.code == "SUCCESS" && result.data != null) {
+            //后端处理成功(将令牌保存到本地)
+            localStorage.setItem("user_token", result.data);
+            //页面跳转
+            location.href = "homepage.html";
+          } else {
+            alert(result.errMsg);
+          }
+        }
+      });
+    }
+  </script>
+</body>
+
+</html>

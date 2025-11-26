@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布电影评论</title>
+    <link rel="stylesheet" href="/css/insert.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title">发布电影评论</h1>
+
+        <div class="comment-form-card">
+            <!-- 电影信息 -->
+            <div class="movie-info">
+                <img src="https://picsum.photos/100/150?random=50" alt="电影海报" class="movie-poster">
+                <div class="movie-meta">
+                    <h2 class="movie-title">流浪地球2</h2>
+                    <p class="movie-details">导演: 郭帆 | 主演: 吴京, 刘德华, 李雪健</p>
+                    <p class="movie-details">类型: 科幻, 灾难, 冒险 | 上映时间: 2023-01-22</p>
+                </div>
+            </div>
+
+            <!-- 评论表单 -->
+            <form id="commentForm">
+                <!-- 评分 -->
+                <div class="form-group">
+                    <label class="form-label">你的评分</label>
+                    <div class="rating-group">
+                        <div class="stars">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <span class="rating-text">请选择评分</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" value="">
+                </div>
+
+                <!-- 评论标题 -->
+                <div class="form-group">
+                    <label class="form-label" for="commentTitle">评论标题</label>
+                    <input type="text" id="commentTitle" name="commentTitle" class="form-input" placeholder="给你的评论起个标题吧（可选）">
+                    <p class="tip-text">简洁明了的标题能让更多人看到你的评论</p>
+                </div>
+
+                <!-- 评论内容 -->
+                <div class="form-group">
+                    <label class="form-label" for="commentContent">评论内容</label>
+                    <textarea id="commentContent" name="commentContent" class="form-textarea" placeholder="分享你对这部电影的看法吧..."></textarea>
+                    <p class="tip-text">请文明评论，分享真实观影感受（至少10个字）</p>
+                </div>
+
+                <!-- 标签选择 -->
+                <div class="form-group">
+                    <label class="form-label">选择标签（可选）</label>
+                    <div class="tags-group">
+                        <span class="tag-option" data-tag="特效震撼">特效震撼</span>
+                        <span class="tag-option" data-tag="剧情紧凑">剧情紧凑</span>
+                        <span class="tag-option" data-tag="演技在线">演技在线</span>
+                        <span class="tag-option" data-tag="家国情怀">家国情怀</span>
+                        <span class="tag-option" data-tag="值得二刷">值得二刷</span>
+                        <span class="tag-option" data-tag="科幻硬核">科幻硬核</span>
+                        <span class="tag-option" data-tag="感人至深">感人至深</span>
+                        <span class="tag-option" data-tag="制作精良">制作精良</span>
+                    </div>
+                    <input type="hidden" id="selectedTags" name="selectedTags" value="">
+                </div>
+
+                <!-- 提交按钮 -->
+                <button type="submit" class="submit-btn" disabled>发布评论</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 评分功能
+        const stars = document.querySelectorAll('.star');
+        const ratingInput = document.getElementById('rating');
+        const ratingText = document.querySelector('.rating-text');
+        const submitBtn = document.querySelector('.submit-btn');
+        const commentContent = document.getElementById('commentContent');
+        const selectedTagsInput = document.getElementById('selectedTags');
+        const tagOptions = document.querySelectorAll('.tag-option');
+
+        // 评分选择
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                const rating = star.dataset.rating;
+                ratingInput.value = rating;
+                
+                // 更新星星样式
+                stars.forEach(s => s.classList.remove('active'));
+                for (let i = 0; i < rating; i++) {
+                    stars[i].classList.add('active');
+                }
+                
+                // 更新评分文本
+                const ratingTexts = ['很差', '一般', '良好', '优秀', '力荐'];
+                ratingText.textContent = `评分：${rating}星（${ratingTexts[rating - 1]}）`;
+                
+                checkFormValidity();
+            });
+        });
+
+        // 标签选择
+        const selectedTags = new Set();
+        tagOptions.forEach(tag => {
+            tag.addEventListener('click', () => {
+                const tagValue = tag.dataset.tag;
+                if (selectedTags.has(tagValue)) {
+                    selectedTags.delete(tagValue);
+                    tag.classList.remove('active');
+                } else {
+                    selectedTags.add(tagValue);
+                    tag.classList.add('active');
+                }
+                selectedTagsInput.value = Array.from(selectedTags).join(',');
+            });
+        });
+
+        // 表单验证（至少选择评分和输入10字以上评论）
+        function checkFormValidity() {
+            const hasRating = !!ratingInput.value;
+            const hasContent = commentContent.value.trim().length >= 10;
+            
+            submitBtn.disabled = !(hasRating && hasContent);
+        }
+
+        // 监听评论内容输入
+        commentContent.addEventListener('input', checkFormValidity);
+
+        // 表单提交
+        document.getElementById('commentForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const formData = {
+                movieTitle: '流浪地球2',
+                rating: ratingInput.value,
+                commentTitle: document.getElementById('commentTitle').value.trim(),
+                commentContent: commentContent.value.trim(),
+                tags: selectedTagsInput.value.split(',').filter(tag => tag)
+            };
+
+            // 模拟提交（实际项目中替换为接口请求）
+            submitBtn.disabled = true;
+            submitBtn.textContent = '发布中...';
+
+            setTimeout(() => {
+                alert('评论发布成功！');
+                // 重置表单
+                document.getElementById('commentForm').reset();
+                stars.forEach(s => s.classList.remove('active'));
+                tagOptions.forEach(t => t.classList.remove('active'));
+                selectedTags.clear();
+                ratingText.textContent = '请选择评分';
+                submitBtn.textContent = '发布评论';
+                submitBtn.disabled = true;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
